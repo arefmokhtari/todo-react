@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import MyP from './MyP';
+import MyP from '../MyP/MyP';
 import './MyDiv.css';
 
 

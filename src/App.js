@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import MyDiv from './component/MyDiv/MyDiv';
+import MyDiv from './components/MyDiv/MyDiv';
 import './App.css';
 
 const App = () => {
