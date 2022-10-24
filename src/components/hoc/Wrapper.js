@@ -1,9 +1,9 @@
 
 
 
-const Wrapper = (component, className) => {
+const Wrapper = (Component, className) => {
     return (props) => <div className={className}>
-        {props.children}
+        <Component {... props}/>
     </div>;
 }
 
