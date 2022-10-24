@@ -5,7 +5,7 @@ import Parent from './components/Parent/Parent';
 import Header from './components/Header/Header';
 
 const App = () => (
-    <Parent style={{background: 'aqua', textAlign: 'center'}}>
+    <Parent>
         <Header title={'ptag'}/>
     </Parent>
 );
