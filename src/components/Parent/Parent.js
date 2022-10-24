@@ -1,10 +1,9 @@
 
-import React  from 'react';
 
+import Container from '../hoc/Container';
+import Wrapper from '../hoc/Wrapper';
+import './Parent.css';
 
-const Parent = ({children, style}) => <div style={style}>{children}</div>;
-
-
-export default Parent;
+export default Wrapper(Container, 'my-class');
 
 
