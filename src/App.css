@@ -5,6 +5,11 @@
     width: 200px;
     height: 100px;
 }
+.set-emailform {
+    width: 200px;
+    height: auto;
+    margin-top: 30px !important;
+}
 
 .input-class {
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -14,6 +19,7 @@
 .input-class>input {
     display: block;
     margin: auto;
+    margin-top: 8px;
     outline: none;
     text-align: center;
     color: gray;
@@ -22,3 +28,19 @@
     border: 2px solid gray;
 }
 
+.submit-btn {
+    background-color: steelblue;
+    color: white !important;
+    border: 0;
+    width: 60px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.submit-btn:focus{
+    background-color: rgb(66, 146, 211);
+}
+.submit-btn:disabled{
+    background-color: rgb(164, 206, 241);
+    cursor: auto;
+}
