@@ -2,6 +2,8 @@
 
 import React, { useRef, useState } from 'react';
 import InputForm from './components/InputForm/InputForm';
+import './App.css';
+
 const App = () => {
     const input = useRef();
     const [state, setState] = useState({textinput: ''});

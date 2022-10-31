@@ -4,7 +4,6 @@ import React from 'react';
 import Wrapper from './../hoc/Wrapper';
 import P from '../P/P';
 
-import './InputForm.css';
 
 const InputForm = props => <>
     <P>{props.textinput}</P>
@@ -13,4 +12,4 @@ const InputForm = props => <>
 
 
 
-export default Wrapper(InputForm, 'input-class');
+export default Wrapper(InputForm, 'input-class set-inputform');
