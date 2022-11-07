@@ -1,0 +1,12 @@
+
+.product-app {
+    width: 600px;
+    height: auto;
+    text-align: center;
+    margin: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgb(251 251 251);
+    display: flex;
+    flex-wrap: wrap;
+}
