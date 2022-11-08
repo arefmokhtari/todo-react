@@ -9,7 +9,10 @@ const Products = () => {
     const [product, setProduct] = useState([]);
     useEffect(setProduct.bind(this, getProducts()), []);
 
-    return product.map(({id, ... kwargs}) => <Controls key={id} {... kwargs}/>);
+    return <>
+    <h3>Products:</h3>
+    {product.map(({id, ... kwargs}) => <Controls key={id} {... kwargs}/>)}
+    </>;
 }
 
-export default RenderCM(Products, {className: 'product-app'});
+export default RenderCM(Products, {className: 'containers product-app'});

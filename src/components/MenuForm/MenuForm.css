@@ -1,0 +1,16 @@
+
+
+.my-form-menu {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right:0;
+    margin: auto;
+    border-radius: 4px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgb(251 251 251);
+}
+
