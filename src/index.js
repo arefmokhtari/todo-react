@@ -1,11 +1,8 @@
 
 
+import { createRoot as cr } from 'react-dom/client';
 import App from './App';
-import { createRoot } from 'react-dom/client';
 
+cr(document.getElementById('root'))
+    .render(<App />);
 
-
-createRoot(document.querySelector('#root'))
-.render(
-    <App />
-);

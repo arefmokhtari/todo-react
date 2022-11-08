@@ -1,0 +1,27 @@
+
+
+.my-form-menu {
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right:0;
+    margin: auto;
+    border-radius: 4px;
+    z-index: 400;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgb(251 251 251);
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.my-form-menu-text {
+    width: 100%;
+}
+.my-form-menu button {
+    width: 20% !important;
+    font-size: 12px !important;
+    margin: 0 auto !important;
+}
