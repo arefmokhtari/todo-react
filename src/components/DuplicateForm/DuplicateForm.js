@@ -1,12 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import MenuFrom from '../MenuForm/MenuForm';
 import './DuplicateForm.css';
-let c = 0;
+
 const DuplicateForm = () => {
-    const [showing, setShowing] = React.useState(false);
-    const [value, setValue] = React.useState('');
+    const [showing, setShowing] = useState(false);
+    const [value, setValue] = useState('');
     const formik = useFormik({
         initialValues: {
             nums: '',
@@ -14,9 +14,8 @@ const DuplicateForm = () => {
         },
         onSubmit: ({nums}) => {
             if(nums.trim()){
-                setValue(nums);
+                setValue(nums.trim());
                 setShowing(true);
-                console.log(c++);
             }
         },
     });
@@ -24,7 +23,7 @@ const DuplicateForm = () => {
     return <form onSubmit={formik.handleSubmit} className='duplicate-form'>
         <input type='text' placeholder='nums' {... formik.getFieldProps('nums')}/>
         <button type='submit'>check</button>
-        {showing && formik.isSubmitting && formik.values.nums && <MenuFrom value={value} hide={setShowing} />}
+        {showing && formik.isSubmitting && formik.values.nums && <MenuFrom showing={showing} value={value} hide={setShowing} />}
     </form>;
 }
 

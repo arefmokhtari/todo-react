@@ -12,3 +12,12 @@ export const getProducts = (num = 10) => {
         arr.push({id: i, title: random.select('mobile', 'laptop'), content: `product ${i}`});
     return arr;
 }
+
+
+export const setDataNav = (value, setData, name, callback) => {
+    const newData = callback(... value.split(' '));
+    setData({
+        name: name,
+        val: newData
+    });
+}
