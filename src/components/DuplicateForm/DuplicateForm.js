@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import MenuFrom from '../MenuForm/MenuForm';
 import './DuplicateForm.css';
 
@@ -10,7 +11,6 @@ const DuplicateForm = () => {
     const formik = useFormik({
         initialValues: {
             nums: '',
-            sub: '',
         },
         onSubmit: ({nums}) => {
             if(nums.trim()){
@@ -18,10 +18,14 @@ const DuplicateForm = () => {
                 setShowing(true);
             }
         },
+        validationSchema: Yup.object({
+            nums: Yup.number().typeError('only numbers !').required('input is empty !')
+        }),
     });
 
     return <form onSubmit={formik.handleSubmit} className='duplicate-form'>
         <input type='text' placeholder='nums' {... formik.getFieldProps('nums')}/>
+        {formik.errors.nums && <span style={{color: 'red'}}>{formik.errors.nums}</span>}
         <button type='submit'>check</button>
         {showing && formik.isSubmitting && formik.values.nums && <MenuFrom showing={showing} value={value} hide={setShowing} />}
     </form>;
