@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import About from '../../components/About/About';
 import Contact from '../../components/Contact/Contact';
-import Modal from '../Modal/Modal';
+import Modal from '../../components/Modal/Modal';
 
 const Home = () => {
     const [modalData, setModalData] = useState({
