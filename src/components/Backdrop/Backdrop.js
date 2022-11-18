@@ -1,10 +1,13 @@
 
-import React from 'react';
-import DynCM from '../../hoc/DynCM';
+import React, { useEffect } from 'react';
 import './Backdrop.css';
 
-const Backdrop = ({children, onClick}) => {
-    return <DynCM className='my-backdrop-form' onClick={onClick}>{children}</DynCM>
-}
+
+const Backdrop = ({ showing, modalHandler }) => {
+    useEffect(() => {
+        if(showing) document.body.classList.add('no-scroll'); else document.body.classList.remove('no-scroll');
+    },[showing]);
+    return showing && <div onClick={() => modalHandler()} className='backdrop-class' />;
+};
 
 export default Backdrop;
