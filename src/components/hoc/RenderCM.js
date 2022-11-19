@@ -2,10 +2,10 @@
 import React, {  } from 'react';
 
 
-const RenderCM = (Component, kwargs) => props => (
-    <div {... kwargs}>
+const RenderCM = (Component, kwargs, Cm = prop => <div {...prop}/>) => props => (
+    <Cm {... kwargs}>
         <Component {... props} />
-    </div>
+    </Cm>
 );
 
 export default RenderCM;

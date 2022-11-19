@@ -1,13 +1,22 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from './components/Layout/Layout';
-import Product from './pages/Product/Product';
+import ProductPage from './pages/ProductPage/ProductPage';
+import Loading from './components/Loading/Loading';
+import Load from './context/LoadingPage';
 
-const App = () => (
-    <Layout>
-        <Product />
-    </Layout>
-);
+const App = () => {
+    const [loading, setLoading] = useState(true);
+    
+    return (
+        <Layout>
+            {loading && <Loading />}
+            <Load.Provider value={{loading: loading, setLoading:setLoading}}>
+                <ProductPage />
+            </Load.Provider>
+        </Layout>
+    );
+}
 
 
 export default App;
