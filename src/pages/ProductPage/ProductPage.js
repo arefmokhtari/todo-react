@@ -2,7 +2,6 @@
 import React from 'react';
 import Products from '../../components/Products/Products';
 import RenderCM from '../../components/hoc/RenderCM';
-import './ProductPage.css';
 
 const ProductPage = () => (
     <>
@@ -11,4 +10,4 @@ const ProductPage = () => (
     </>
 );
 
-export default RenderCM(ProductPage, {className: 'product-page'},  prop => <span {...prop} />);
+export default RenderCM(ProductPage, {style: {textAlign: 'center'}},  prop => <span {...prop} />);
