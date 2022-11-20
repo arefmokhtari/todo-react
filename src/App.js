@@ -8,14 +8,14 @@ import Load from './context/LoadingPage';
 const App = () => {
     const [loading, setLoading] = useState(true);
     
-    return (
-        <Layout>
-            {loading && <Loading />}
+    return (<>
+        {loading && <Loading />}
+        <Layout>        
             <Load.Provider value={{loading: loading, setLoading:setLoading}}>
                 <ProductPage />
             </Load.Provider>
         </Layout>
-    );
+    </>);
 }
 
 
