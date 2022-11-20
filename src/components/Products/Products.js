@@ -25,7 +25,10 @@ const Products = () => {
                     return response.data;
                 else throw new Api.MyConnectionError();
             })
-            .catch(error => setError({ error: true, errorObj: error }))
+            .catch(error => {
+                Load.toast(error.message);
+                setError({ error: true, errorObj: error });
+            })
             .then(data => setProduct(data))
             .finally(() => setTimeout(()=> Load.setLoading(false), delay));
     }, []);

@@ -18,7 +18,7 @@ export class MyConnectionError extends Error {
     Element = () => <p style={{color: 'red', fontSize: '25px'}}>{this.message}</p>;
 }
 
-export const POSTS = '/posts';
+export const POSTS = '/postss';
 
 export default {
     api,
