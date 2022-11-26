@@ -1,10 +1,11 @@
 
 import React from 'react';
 import './NavItem.css';
+import { Link } from 'react-router-dom';
 
 const NavItem = ({link, children: childs}) => (
     <li className='nav-item'>
-        <a href={link}>{childs}</a>
+        <Link to={link}>{childs}</Link>
     </li>
 );
 

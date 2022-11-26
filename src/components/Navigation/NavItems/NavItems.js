@@ -6,8 +6,8 @@ import './NavItems.css';
 
 const configure = {
     'خانه': '/',
-    'کاربران': '/',
-    'اضافه کردن کاربر': '/',
+    'کاربران': '/users',
+    'اضافه کردن کاربر': '/add-user',
 }
 
 const NavItems = () => (
