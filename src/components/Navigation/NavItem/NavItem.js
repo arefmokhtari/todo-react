@@ -1,11 +1,11 @@
 
 import React from 'react';
 import './NavItem.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NavItem = ({link, children: childs}) => (
     <li className='nav-item'>
-        <Link to={link}>{childs}</Link>
+        <NavLink style={({isActive}) => ({borderBottom: isActive?'3px solid rgb(218, 178, 255)':'none'})} to={link}>{childs}</NavLink>
     </li>
 );
 

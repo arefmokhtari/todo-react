@@ -1,0 +1,14 @@
+
+
+.user-class {
+    width: 80%;
+    height: auto;
+    margin: 10px auto;
+    box-shadow: 0 0 6px 0 rgba(0 ,0 , 0, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
