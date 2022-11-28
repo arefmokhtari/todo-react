@@ -1,7 +1,6 @@
 
 import React from 'react';
 import './User.css';
-import RenderCM from '../../hoc/renderCM';
 import { enDate2FaDate } from '../../utils/plugins';
 
 const User = ({id, name, email, address, created_at, updated_at, click}) =>(
@@ -10,7 +9,7 @@ const User = ({id, name, email, address, created_at, updated_at, click}) =>(
         <h5>ایمیل : {email}</h5>
         <p>آدرس : {address}</p>
         <p>ساخته شده : {enDate2FaDate(created_at)}</p>
-        <p>آپدیت شده : {created_at===updated_at?'اپدیت نشده!': enDate2FaDate(updated_at)}</p>
+        <p>آپدیت : {created_at===updated_at?'اپدیت نشده!': enDate2FaDate(updated_at)}</p>
     </div>
 );
 
