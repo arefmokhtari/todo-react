@@ -1,7 +1,7 @@
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React, { useEffect } from 'react';
 import './Backdrop.css';
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 const Backdrop = ({}) => {
     useEffect(() => {
@@ -10,5 +10,5 @@ const Backdrop = ({}) => {
     },[]);
     return <div className='backdrop-class' />;
 };
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default Backdrop;

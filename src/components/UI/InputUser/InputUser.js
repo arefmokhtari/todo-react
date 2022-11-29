@@ -1,20 +1,41 @@
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React from 'react';
 import InputError from './InputError/InputError';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 
-const InputUser = ({errors, name, email, password, address, touched}) => {
+const InputUser = ({formik, isPass, AnyCM}) => {
+
     return <>
-    <input style={errors.name?{boxShadow: '0 0 2px 0 blue'}:{}} type='text' {... name} placeholder='نام' />
-    <input style={errors.email?{boxShadow: '0 0 2px 0 blue'}:{}} type='email' {... email} placeholder='ایمیل' /> <br/>
-    <input style={errors.password?{boxShadow: '0 0 2px 0 blue'}:{}} type='password' {... password} placeholder='پسورد' /> <br/>
-    <input style={errors.address?{boxShadow: '0 0 2px 0 blue'}:{}} type='text' {... address} placeholder='آدرس' />
+    <input
+        style={formik.errors.name?{boxShadow: '0 0 2px 0 blue'}:{}}
+        type='text' {... formik.getFieldProps('name')}
+        placeholder='نام' 
+    />
+    <input 
+        style={formik.errors.email?{boxShadow: '0 0 2px 0 blue'}:{}} 
+        type='email' {... formik.getFieldProps('email')} 
+        placeholder='ایمیل' 
+    /> <br/>
+    {isPass && <><input 
+        style={formik.errors.password?{boxShadow: '0 0 2px 0 blue'}:{}} 
+        type='password' 
+        {... formik.getFieldProps('password')} 
+        placeholder='پسورد' 
+    /> <br/></>} 
+    {AnyCM && <AnyCM />}
+    <input 
+        style={formik.errors.address?{boxShadow: '0 0 2px 0 blue'}:{}} 
+        type='text' 
+        {... formik.getFieldProps('address')} 
+        placeholder='آدرس' 
+    />
     
     {['name', 'email', 'password', 'address'].map((value, i) =>
-        <InputError key={i} name={value} errors={errors} touched={touched} />
+        <InputError key={i} name={value} errors={formik.errors} touched={formik.touched} />
     )}
     </>;
 }
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 export default InputUser;

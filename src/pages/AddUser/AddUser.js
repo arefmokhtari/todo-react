@@ -1,4 +1,4 @@
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React, { useEffect, useContext } from 'react';
 import { useFormik } from 'formik';
 import { validate } from '../../utils/yupValidate';
@@ -6,15 +6,17 @@ import { addUser as addUserRequest } from '../../api/requests';
 import { toast } from 'react-toastify';
 import { Load } from '../../context/contexts';
 import InputUser from '../../components/UI/InputUser/InputUser';
-import './AddUser.css';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 
 const AddUser = () => {
+    // - - - - - - - - - - - - - - - - //
     const load = useContext(Load);
     useEffect(() => {
         load(true);
         setTimeout(()=> load(false), 500);
     },[]);
+    // - - - - - - - - - - - - - - - - //
     const sendUserHandler = async ({ address, ... kwargs }, { resetForm }) => {
         load(true);
 
@@ -32,6 +34,7 @@ const AddUser = () => {
         }
         load(false);
     }
+    // - - - - - - - - - - - - - - - - //
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -42,19 +45,16 @@ const AddUser = () => {
         onSubmit: sendUserHandler,
         validationSchema: validate, 
     });
+    // - - - - - - - - - - - - - - - - //
     return <form className='form-user' onSubmit={formik.handleSubmit}>
             <InputUser 
-                errors={formik.errors}
-                name={formik.getFieldProps('name')}
-                email={formik.getFieldProps('email')}
-                password={formik.getFieldProps('password')}
-                address={formik.getFieldProps('address')}
-                touched={formik.touched}
+                formik={formik}
+                isPass={true}
             />
             <button type='submit'>اضافه کردن کاربر</button> <br/>
     </form>;
 };
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 export default AddUser;
 

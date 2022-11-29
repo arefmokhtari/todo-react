@@ -1,7 +1,9 @@
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React from 'react';
 import Backdrop from '../../Backdrop/Backdrop';
 import './Loading.css';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
 
 const Loading = () => {
     return <>
@@ -11,5 +13,5 @@ const Loading = () => {
         <Backdrop />
     </>;
 }
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default Loading;

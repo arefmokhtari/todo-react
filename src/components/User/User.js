@@ -1,10 +1,12 @@
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React from 'react';
 import './User.css';
 import { enDate2FaDate } from '../../utils/plugins';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
 
 const User = ({id, name, email, address, created_at, updated_at, click}) =>(
-     <div className='user-class' onClick={() => click(id)}>
+     <div className='user-class' onClick={() => click(id, {name, email, address})}>
         <h3>نام : {name}</h3>
         <h5>ایمیل : {email}</h5>
         <p>آدرس : {address}</p>
@@ -12,7 +14,7 @@ const User = ({id, name, email, address, created_at, updated_at, click}) =>(
         <p>آپدیت : {created_at===updated_at?'اپدیت نشده!': enDate2FaDate(updated_at)}</p>
     </div>
 );
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 
 export default User;

@@ -1,8 +1,8 @@
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React from 'react';
 import NavItems from '../NavItems/NavItems';
 import './Navbar.css';
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Navbar = () =>  (
     <header className='navbar'>
         <nav>
@@ -10,7 +10,7 @@ const Navbar = () =>  (
         </nav>
     </header>
 );
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 
 export default Navbar;
