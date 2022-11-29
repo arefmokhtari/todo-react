@@ -1,0 +1,23 @@
+
+
+.back-btn {
+    position: absolute;
+    width: 70px;
+    height: 30px;
+    border-radius: 8px;
+    border: 0;
+    background-color: blueviolet;
+    color: white;
+    right: 20px;
+    cursor: pointer;
+}
+
+.delete-user-btn{
+    background-color: red !important;
+}
+.delete-user-btn:hover{
+    background-color: rgb(253, 78, 78) !important;
+}
+.back-btn:hover{
+    background-color: rgb(160, 70, 245);
+}
