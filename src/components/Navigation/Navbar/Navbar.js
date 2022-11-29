@@ -1,11 +1,16 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React from 'react';
-import Navbar from '../Navigation/Navbar/Navbar';
+import NavItems from '../NavItems/NavItems';
+import './Navbar.css';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+const Navbar = () =>  (
+    <header className='navbar'>
+        <nav>
+            <NavItems />
+        </nav>
+    </header>
+);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-const Layout = ({children: childs}) => <>
-    <Navbar />
-    <main>{childs}</main>
-</>;
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export default Layout;
+
+export default Navbar;
