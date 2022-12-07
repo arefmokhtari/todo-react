@@ -8,17 +8,20 @@ import { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { toast } from 'react-toastify';
 import { useLoading } from '../../hooks/useLoading';
+import cryptoJS from 'crypto-js';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const SignIn = () => {
     const navigate = useNavigate();
     const user = useContext(UserContext);
     useLoading();
     const submitHandler = ({ gender,... values }) => {
-        toast('با موفقیت انجام شد');
+    
         user.setAuthUser(true, {
             isMen: gender === 'his',
             ... values
         });
+        localStorage.setItem('datauser', JSON.stringify({username: values.username,isMen: gender === 'his', email: values.email, password: cryptoJS.SHA256(values.username).toString()}));
+        toast.success('با موفقیت انجام شد');
         navigate('/');
         
     }

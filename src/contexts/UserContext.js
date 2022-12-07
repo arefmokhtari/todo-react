@@ -1,7 +1,7 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React, { useReducer } from 'react';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-const config = {
+export const config = {
     isAuth: false,
     user: {
         isMen: true,
@@ -28,12 +28,11 @@ const userReducer = (state, action) => {
 const User = ({children: child}) => {
     const [user, setConfigureUser] = useReducer(userReducer, {... config});
 
-    const isAuthHandler = (isAuth = false, user/* = {... config.user}*/) => {
-        console.log(user);
+    const isAuthHandler = (isAuth = false, user = {... config.user}) => {
         setConfigureUser({
             type: 'AUTH',
             isAuth: isAuth,
-            user: {... user},
+            user,
         })
     }
 
