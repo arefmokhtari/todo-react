@@ -5,7 +5,7 @@ import './NavItems.css';
 
 const configure = {
     'home': '/',
-    'add product': '/add-user',
+    'add product': '/add-product',
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const NavItems = () => (

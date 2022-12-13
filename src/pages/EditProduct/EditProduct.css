@@ -1,0 +1,46 @@
+
+
+.back-button{
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    top: 72px;
+    right: 40px;
+}
+
+.myform {
+    margin: 20px auto;
+    width: 60%;
+}
+
+.myform input {
+    font: inherit;
+    padding: 0.1rem 0.25rem;
+    border: none;
+    border-radius: 3px;
+    border-bottom: 2px solid #eeeeee;
+    margin-bottom: 1rem;
+    color: #616161;
+}
+
+.myform label,
+.myform input {
+    display: block;
+    width: 50%;
+    margin: auto;
+    margin-top: 5px;
+}
+.myform input:focus {
+    outline: none;
+    border-bottom-color: #1e88e5;
+}
+.button-submit{
+    margin: 10px auto;
+    width: 110px;
+    height: 25px;
+    font-size: 14px;
+}
+.span-error {
+    color: #ff9191;
+    font-size: 12px;
+}

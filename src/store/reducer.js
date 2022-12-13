@@ -21,13 +21,20 @@ const config = {
     ]
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+const getNewId = (products, step = 1) => {
+    const id = products.length + step;
+    if(products.find(v => v.id == id))
+        return getNewId(products, step + 1);
+    return id;
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const reducer = (state = config, action) => {
     const { products, ... kwargs } = state;
     switch(action.type){
         case AT.ADD:
             return {
                 ... kwargs,
-                products: products.concat({ id: products.length + 1, ... action.product }),
+                products: products.concat({ id: getNewId(products), ... action.product }),
             }
         case AT.REMOVEBYIDS:
             return {
@@ -42,7 +49,7 @@ const reducer = (state = config, action) => {
         case AT.UPDATEPRODUCTBYID:
             return {
                 ... kwargs,
-                products: products.map(product => product.id === action.id?{id: action.id, ... action.product}:product),
+                products: products.map(product => product.id == action.id?{id: action.id, ... action.product}:product),
             }
         default:
             return state;
