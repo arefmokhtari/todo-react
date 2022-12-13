@@ -34,6 +34,23 @@
     outline: none;
     border-bottom-color: #1e88e5;
 }
+.myform select {
+    display: block;
+    margin: 10px auto;
+    color: white;
+    background-color: #616161;
+    border: 0;
+    border-color: 4px;
+    width: 120px;
+    height: 28px;
+    cursor: pointer;
+    padding-bottom: 4px;
+    border-radius: 4px;
+}
+.myform select:hover {
+    opacity: .6;
+}
+
 .button-submit{
     margin: 10px auto;
     width: 110px;

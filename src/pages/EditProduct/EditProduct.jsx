@@ -11,6 +11,7 @@ import InputForm from '../../components/InputForm/InputForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Func from '../../store/func';
+import { pics } from '../../store/reducer';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const EditProduct = () => {
     const products = useSelector(store => store.products);
@@ -26,6 +27,7 @@ const EditProduct = () => {
         initialValues: {
             title: '',
             discription: '',
+            img: '',
         },
         validationSchema: productValidate,
         onSubmit: submitProductHandler,
@@ -34,10 +36,11 @@ const EditProduct = () => {
     useEffect(() => {
         const product = products.find(pr => pr.id == id);
         if(product)
-            formik.setValues({title: product.title, discription: product.discription});
+            formik.setValues({title: product.title, discription: product.discription, img: product.img});
+        
     }, []);
     useLoading();
-
+    
     return <>
         <h1>edit product</h1>
         <Button onClick={() => navigate('/')} className='back-button'>back</Button>
@@ -48,6 +51,10 @@ const EditProduct = () => {
                 isSubmitting={formik.isSubmitting}
                 errors={formik.errors}
             />
+            <label htmlFor="img">pic</label>
+            <select name="img" onChange={formik.handleChange}>
+                {pics.map((v, i) => <option key={i} selected={formik.values.img==v?true:false} value={v}>{v}</option>)}
+            </select>
             <Button className='button-submit' type='submit'>edit product</Button>
         </form>
     </>

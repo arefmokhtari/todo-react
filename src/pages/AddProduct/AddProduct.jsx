@@ -8,11 +8,13 @@ import { productValidate } from '../../validate/yupvalidate';
 import * as Func from '../../store/func';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { pics } from '../../store/reducer';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const AddProduct = () => {
     useLoading();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
     const submitProductHandler = values => {
         dispatch(Func.addProduct(values));
         toast.success('done !');
@@ -23,6 +25,7 @@ const AddProduct = () => {
         initialValues: {
             title: '',
             discription: '',
+            img: '',
         },
         validationSchema: productValidate,
         onSubmit: submitProductHandler,
@@ -38,6 +41,9 @@ const AddProduct = () => {
                     isSubmitting={formik.isSubmitting}
                     errors={formik.errors}
                 />
+                <select name="img" onChange={formik.handleChange}>
+                    {pics.map((v, i) => <option key={i} selected={formik.values.img==v?true:false} value={v}>{v}</option>)}
+                </select>
                 <Button className='button-submit' type='submit'>add product</Button>
             </form>
         </>

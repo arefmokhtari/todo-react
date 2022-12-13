@@ -5,8 +5,10 @@ import Button from '../UI/Button/Button';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Product = ({ product, selected }) => {
     const navigate = useNavigate();
+
     return (
         <Card width='200px'>
+            <img src={product.img} alt="pic" style={{borderRadius: '4px'}} />
             <h3>title: {product.title}</h3>
             <h4>discription: {product.discription}</h4>
             <label>delete: </label>
