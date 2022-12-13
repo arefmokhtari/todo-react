@@ -1,13 +1,13 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import { Routes, Route } from 'react-router-dom';
-import Index from '../pages/Index/Index';
-import SignIn from '../pages/SignIn/SignIn';
+import Products from '../pages/Products/Products';
+import EditProduct from '../pages/EditProduct/EditProduct';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Router = () => (
     <Routes>
-        <Route path='/' element={<Index />} />
-        <Route path='/sign-in' element={<SignIn />} />
-        <Route path='*' element={<h3>not found !</h3>}/>
+        <Route path='/' element={<Products />} />
+        <Route path='/edit/:id' element={<EditProduct />} />
+        <Route path='*' element={<h1>یافت نشد</h1>} />
     </Routes>
 );
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

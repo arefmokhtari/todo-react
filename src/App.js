@@ -2,21 +2,24 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './Router/Router';
-import UserContext from './contexts/UserContext';
-import './App.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';  
 import Loading  from './components/UI/Loading/Loading';
+import { Provider } from 'react-redux';
+import { store } from './store/reducer';
+import Layout from './components/Layout/Layout';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 const App = () => (
     <BrowserRouter>
-        <UserContext>
+        <Provider store={store}>
             <ToastContainer  position="top-center" />
-            <Loading>
-            <Router />
-            </Loading>
-        </UserContext>
+            <Layout>
+                <Loading>
+                    <Router />
+                </Loading>
+            </Layout>
+        </Provider>
     </BrowserRouter>
 );
 

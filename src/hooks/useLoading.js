@@ -10,6 +10,6 @@ export const useLoading = (delay = 500) => {
             load(false);
         }, delay);
         
-    }, []);
+    }, [delay, load]);
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
