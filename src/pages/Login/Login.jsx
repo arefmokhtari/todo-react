@@ -1,16 +1,14 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-
-
+import Temp4SignLogin from '../../components/Temp4SignLogin/Temp4SignLogin';
 import { TextField } from '@mui/material';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 const Login = () => {
-    return ( <>
-        <br />
-        <div dir="rtl">
-            <TextField label='نام' dir="rtl"/>
-        </div>
-    </> );
+    return ( 
+        <Temp4SignLogin>
+
+        </Temp4SignLogin>
+    );
 }
 
 
