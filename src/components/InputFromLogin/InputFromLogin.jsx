@@ -31,10 +31,9 @@ const InputField = styled(TextField)(() => ({
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const InputFromLogin = ({ Icon , ... props }) => (
     <Box sx={{width: '91%', margin: 'auto'}} dir='rtl'>
-        <Box sx={{position: 'relative', display: 'inline-block',width: '100%'}}>
-            {Icon && <Icon style={{position: 'absolute', left: 10, top: 22 , width: 20, height: 20}} />}
-            <InputField {... props} variant="outlined" />
-        </Box>
+        <InputField {... props} variant="outlined" InputProps={{
+            endAdornment: Icon
+        }}/>
     </Box>
 );
 
