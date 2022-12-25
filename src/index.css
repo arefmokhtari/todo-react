@@ -1,9 +1,20 @@
 
-/* * {
+
+
+@font-face {
+    font-family: 'IRANSansX';
+    src: local('IRANSansX'), url('./fonts/IRANSansXRegular.ttf') format('truetype');
+}
+
+* {
+    font-family: IRANSansX;
     box-sizing: border-box;
 }
 
+body {
+    font-family: IRANSansX;
+}
 html, body {
     padding: 0;
     margin: 0;
-} */
+}
