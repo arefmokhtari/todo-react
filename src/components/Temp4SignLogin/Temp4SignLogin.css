@@ -27,12 +27,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .centerinputhandinmaininput {
     width: 98%;
     height: auto;
     direction: rtl;
+
 }
 
 
