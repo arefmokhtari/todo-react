@@ -9,31 +9,35 @@ const InputField = styled(TextField)(() => ({
         fontSize: '19px',
         paddingLeft: '4px',
     },
-    '& label.Mui-focused': {
-        color: '#71D0A0',
-    },
     '& fieldset': {
         borderRadius: '16px',
-    },
-    '& .MuiOutlinedInput-root': {
-        '& fieldset': {
-            border: '2px solid #C0C0C0',
-        },
-        '&:hover fieldset': {
-            border: '3px solid #C0C0C0',
-        },
-        '&.Mui-focused fieldset': {
-            borderColor: '#71D0A0',
-        },
     },
 }));
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const InputFromLogin = ({ Icon , ... props }) => (
     <Box sx={{width: '91%', margin: 'auto'}} dir='rtl'>
-        <InputField {... props} variant="outlined" InputProps={{
-            endAdornment: Icon
-        }}/>
+        <InputField 
+            {... props} 
+            variant="outlined" 
+            InputProps={{endAdornment: Icon}}
+            sx={{
+                '& label.Mui-focused': {
+                    color: props.error?'#d32f2f':'#71D0A0',
+                },
+                '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                        border: '2px solid #C0C0C0',
+                    },
+                    '&:hover fieldset': {
+                        border: `3px solid  ${props.error?'#d32f2f':'#C0C0C0'}`,
+                    },
+                    '&.Mui-focused fieldset': {
+                        borderColor: props.error?'#d32f2f':'#71D0A0',
+                    },
+                },
+            }}
+        />
     </Box>
 );
 
