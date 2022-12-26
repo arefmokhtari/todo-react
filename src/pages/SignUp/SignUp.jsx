@@ -10,7 +10,7 @@ import InputEmPas from '../../components/InputEmPas/InputEmPas';
 const SignUp = () => {
     // - - - - - - - - - - - - - - //
     const onSubmit = (values) => {
-        console.log(values);
+        alert(values.toString());
     }
     // - - - - - - - - - - - - - - //
     const formik = useFormik({

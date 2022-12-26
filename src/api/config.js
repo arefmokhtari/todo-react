@@ -6,7 +6,9 @@ const url = '';
 
 // - - - - - - - - - - - - - - //
 
-const api = create(url);
+const api = create({
+    baseURL: url,
+});
 
 // - - - - - - - - - - - - - - //
 export default api;

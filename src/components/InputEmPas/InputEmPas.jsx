@@ -14,7 +14,7 @@ const InputEmPas = ({ formik }) => ( <>
     />
     <InputFromLogin 
         style={{marginBottom: '10px'}} 
-        type='text' {... formik.getFieldProps('password')} 
+        type='password' {... formik.getFieldProps('password')} 
         label='رمز عبور' 
         Icon={<PasswdIcon />} 
         helperText={formik.touched.password && formik.errors.password}
