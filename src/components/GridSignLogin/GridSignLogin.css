@@ -60,18 +60,15 @@
     margin-bottom: 40px;
 }
 
-.styleButtonHand {
-    width: 91%;
-    height: 60px;
-    background-color: #71D0A0 !important;
-    margin: auto;
-    font-size: 27px !important;
-    padding-bottom: 6px;
-    box-shadow: 0 0 0 0 !important;
-    border-radius: 16px !important;
-}
-
 @media screen and (max-width: 900px) {
     .grid4signupcom4img{height: 23vh;}
     .grid4signupcominputmain{height: 77vh;}
+    .centerinputhandinmaininput p {
+        margin-bottom: 26px;
+        font-size: 12px;
+    }
+    .centerinputhandinmaininput h1 {
+        font-size: 24px;
+        /* margin-top: 1%; */
+    }
 }

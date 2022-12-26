@@ -1,5 +1,4 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { Button } from '@mui/material';
 import InputFromLogin from '../../components/InputFromLogin/InputFromLogin';
 import UserIcon from '../../components/UI/ICONS/UserIcon/UserIcon';
 import { useFormik } from 'formik';
@@ -36,7 +35,6 @@ const SignUp = () => {
                     error={formik.touched.name && (formik.errors.name != null)} 
                 />
                 <InputEmPas formik={formik} />
-                <Button disabled={formik.isSubmitting} type='submit' className='styleButtonHand' sx={{display: 'block !important', margin: 'auto'}} variant='contained'>ورود</Button>
             </form>
         </GridSignLogin>
     );
