@@ -37,8 +37,6 @@
 
 }
 
-
-
 .centerinputhandinmaininput h1 {
     text-align: center;
     font-weight: 600;
@@ -57,7 +55,7 @@
     color: #707070;
     width: 91%;
     margin: auto;
-    margin-bottom: 40px;
+    margin-bottom: 26px;
 }
 
 @media screen and (max-width: 900px) {

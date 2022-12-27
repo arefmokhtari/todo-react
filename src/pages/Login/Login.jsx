@@ -5,6 +5,9 @@ import GridSignLogin from '../../components/GridSignLogin/GridSignLogin';
 import { loginValidate } from '../../validates/SignLoginValidate';
 import InputEmPas from '../../components/InputEmPas/InputEmPas';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useLoadingByFunc } from '../../hooks/loading-hook';
+import { login as loginRequest } from '../../api/requests';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const SpanSignUp = styled.span`
     position: absolute;
@@ -21,10 +24,17 @@ const SpanSignUp = styled.span`
 `;
 
 const Login = () => {
+    const loading = useLoadingByFunc();
     // - - - - - - - - - - - - - - //
-    const onSubmit = (values) => {
-        alert(values);
-    }
+    const onSubmit = async values => await loading(async () => {
+        const req = {ok: true} //await loginRequest(values);
+        
+        if(req.ok){
+            // localStorage.setItem('token', req.data.token);
+            toast.success('لاگین با موفقیت انجام شد');
+        }else toast.error('انجام نشد، در وارد کردن اطلاعات دقت کنید');
+    });
+
     // - - - - - - - - - - - - - - //
     const formik = useFormik({
         initialValues: {

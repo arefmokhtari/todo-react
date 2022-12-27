@@ -5,12 +5,19 @@ import { useFormik } from 'formik';
 import GridSignLogin from '../../components/GridSignLogin/GridSignLogin';
 import { signUpValidate } from '../../validates/SignLoginValidate';
 import InputEmPas from '../../components/InputEmPas/InputEmPas';
+import { useLoadingByFunc } from '../../hooks/loading-hook';
+import { signUp as signUpRequest } from '../../api/requests';
+import { toast } from 'react-toastify';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const SignUp = () => {
+    const loading = useLoadingByFunc();
     // - - - - - - - - - - - - - - //
-    const onSubmit = (values) => {
-        alert(values.toString());
-    }
+    const onSubmit = async values => await loading(async () => {
+        const req = {ok: true} // await signUpRequest(values);
+        if(req.ok)
+            toast.success('حساب ساخته شد');
+        else toast.error('مشکلی پیش آمده است');
+    });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({
         initialValues: {
