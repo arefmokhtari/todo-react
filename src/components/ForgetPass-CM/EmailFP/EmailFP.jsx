@@ -4,6 +4,7 @@ import InputFromLogin from '../../InputFromLogin/InputFromLogin';
 import { LogBtn } from '../../InputEmPas/InputEmPas.style';
 import { useFormik } from 'formik';
 import OtpFP from '../OtpFP/OtpFP';
+import { emailValidate } from '../../../validates/ForgetPassValidate';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const EmailCM = ({ change }) => {
     // - - - - - - - - - - - - - - //
@@ -12,16 +13,17 @@ const EmailCM = ({ change }) => {
             CM: OtpFP,
             config: {
                 email: values.email,
-            }
-        })
+            },
+        });
     }
     // - - - - - - - - - - - - - - //
     const formik = useFormik({
         initialValues: {
             email: '',
-        },  
+        },
+        validationSchema: emailValidate,  
         onSubmit,
-    })
+    });
     // - - - - - - - - - - - - - - //
     return ( <>
         <p>لطفا ایمیل خود را وارد کنید</p>
@@ -31,6 +33,8 @@ const EmailCM = ({ change }) => {
                 type='email'
                 Icon={<EmailIcon />}
                 { ... formik.getFieldProps('email') }
+                helperText={formik.touched.email && formik.errors.email}
+                error={formik.touched.email && (formik.errors.email != null)}
             />
             <LogBtn type='submit' className='styleButtonHand' variant='contained'>فرستادن رمز</LogBtn>
         </form>
