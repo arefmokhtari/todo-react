@@ -1,57 +1,36 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { useFormik } from 'formik';
-import GridSignLogin from '../../components/GridSignLogin/GridSignLogin';
-import { loginValidate } from '../../validates/SignLoginValidate';
-import InputEmPas from '../../components/InputEmPas/InputEmPas';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useLoadingByFunc } from '../../hooks/loading-hook';
-import { SpanSignUp } from './Login.style';
-import { login as loginRequest } from '../../api/requests';
+import { Grid, Container } from '@mui/material';
+import { GridTop, Grid4Login, DivS, DivLogin, LogBtn } from './Login.style';
+import InputFromLogin from '../../components/InputFromLogin/InputFromLogin';
+import logo from './logo.png';
+import PasswdIcon from '../../components/UI/ICONS/PasswdIcon/PasswdIcon';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Login = () => {
-    const loading = useLoadingByFunc();
-    // - - - - - - - - - - - - - - //
-    const onSubmit = async values => await loading(async () => {
-        const req = {ok: true} //await loginRequest(values);
-        
-        if(req.ok){
-            // localStorage.setItem('token', req.data.token);
-            toast.success('لاگین با موفقیت انجام شد');
-        }else toast.error('انجام نشد، در وارد کردن اطلاعات دقت کنید');
-    });
-
-    // - - - - - - - - - - - - - - //
-    const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: '',
-        },
-        onSubmit,
-        validationSchema: loginValidate,
-    })
-    // - - - - - - - - - - - - - - //
-    return ( 
-        <GridSignLogin>
-            <h1>ورود و ثبت نام !</h1>
-            <p>شرکت نرم افزاری داده کاووب در سال 1396 فعالیت خود را در شهرستان قائمشهر در سه بخش طراحی سایت سامانه های تحت وب و اپلیکیشن های اندروید و آی او اس آغاز </p>
-            <form onSubmit={formik.handleSubmit}>
-                <InputEmPas formik={formik} />
-            </form>
-            <SpanSignUp>
-                <span style={{display: 'block'}}>
-                آیا ثبت نام کرده اید؟
-                 <Link style={{color: '#71D0A0',textDecoration: 'none', paddingRight: '4px'}} to='/signup'>
-                    ثبت نام
-                </Link>
-                </span>
-                <Link style={{color: '#71D0A0',textDecoration: 'none', paddingRight: '4px'}} to='/forget-passwd'>
-                    رمز خود را فراموش کرده ام
-                </Link>
-            </SpanSignUp>
-        </GridSignLogin>
+    return (
+        <Container maxWidth="lg"  direction='column' >
+            <Grid container>
+                <GridTop xs={12} sx={{display: 'flex'}} item  alignItems="center" >
+                    <DivS />
+                    <img src={logo} alt="" style={{height: '150px'}} />
+                    <DivS />
+                </GridTop>
+                <Grid4Login xs={12} sx={{textAlign: 'center'}} item>
+                    <DivLogin>
+                        <h1 style={{color: '#525252', paddingTop: '10px'}}>صفحه ورود پنل</h1>
+                        <InputFromLogin 
+                        label='یوزنیم'
+                        />
+                        <InputFromLogin 
+                        type='password'
+                        label='رمز عبور' 
+                        Icon={<PasswdIcon />} 
+                    />
+                        <LogBtn type='submit' variant='contained'>ورود</LogBtn>
+                    </DivLogin>
+                </Grid4Login>
+            </Grid>
+        </Container>
     );
-    // - - - - - - - - - - - - - - //
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default Login;
