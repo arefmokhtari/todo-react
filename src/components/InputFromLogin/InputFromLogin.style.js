@@ -9,6 +9,7 @@ export const InputField = styled(TextField)(({ theme }) => ({
     '& label.MuiFormLabel-root': {
         fontSize: '19px',
         paddingLeft: '4px',
+        backgroundColor: 'white',
     },
     '& fieldset': {
         borderRadius: '16px',

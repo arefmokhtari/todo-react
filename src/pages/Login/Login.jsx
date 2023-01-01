@@ -13,12 +13,17 @@ const Login = () => {
     const loading = useLoadingByFunc();
     // - - - - - - - - - - - - - - //
     const onSubmit = async values => await loading(async () => {
-        const req = {ok: true} //await loginRequest(values);
-        
-        if(req.ok){
-            // localStorage.setItem('token', req.data.token);
-            toast.success('لاگین با موفقیت انجام شد');
-        }else toast.error('انجام نشد، در وارد کردن اطلاعات دقت کنید');
+        const req = await loginRequest(values);
+        console.log(req);
+        if(req.status === 400)
+            toast.success('پسورد یا ایمیل اشتباه است');
+        else{
+            if(req.ok){
+                console.log(values);
+                // localStorage.setItem('token', req.data.token);
+                toast.success('لاگین با موفقیت انجام شد');
+            }else toast.error('مشکلی پیش آمده است');
+        }
     });
 
     // - - - - - - - - - - - - - - //
