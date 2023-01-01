@@ -2,7 +2,7 @@
 import { create } from 'apisauce';
 // - - - - - - - - - - - - - - //
 
-const url = '';
+const url = 'http://localhost:8000/api';
 
 // - - - - - - - - - - - - - - //
 

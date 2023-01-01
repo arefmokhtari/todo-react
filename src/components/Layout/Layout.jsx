@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Layout = ({ children: child }) => (
     <BrRouter>
             <ThemeProvider theme={theme}>
-            <ToastContainer position="top-center"  />
+            <ToastContainer position="top-center" toastStyle={{textAlign: 'right'}} />
                 <LoadingProvider>
                     <RTL>
                         {child}

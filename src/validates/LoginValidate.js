@@ -3,30 +3,19 @@
 import * as yup from 'yup';
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-const login = {
-    email: yup
-        .string()
-        .email('ایمیل مطابقت ندارد')
-        .max(150, 'تعداد حروف وارد شده زیاد است')
-        .required('لطفا ایمیل را وارد کنید'),
-    password: yup
-        .string()
-        .min(8, 'باید بیشتر از هشت حرف باشد')
-        .max(150, 'تعداد حروف وارد شده زیاد است')
-        .matches(/^[a-zA-Z0-9#-]+$/, 'باید شامل حروف انگلیسی یا ارقام ان باشد')
-        .required('لطفا پسورد را وارد کنید'),
-}
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-export const loginValidate = yup.object().shape(login);
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export const signUpValidate = yup.object().shape({
+export const loginValidate = yup.object().shape({
     name: yup
         .string()
         .min(3, 'باید بیشتر از سه حرف باشد')
         .max(100, 'تعداد حروف وارد شده زیاد است')
         .required('لطفا اسم را وارد کنید'),
-    ... login,
+    password: yup
+        .string()
+        .min(6, 'باید بیشتر از شش حرف باشد')
+        .max(150, 'تعداد حروف وارد شده زیاد است')
+        .matches(/^[a-zA-Z0-9#-]+$/, 'باید شامل حروف انگلیسی یا ارقام ان باشد')
+        .required('لطفا پسورد را وارد کنید'),
 });
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
