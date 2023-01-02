@@ -8,13 +8,17 @@ import InputEmPas from '../../components/InputEmPas/InputEmPas';
 import { useLoadingByFunc } from '../../hooks/loading-hook';
 import { signUp as signUpRequest } from '../../api/requests';
 import { toast } from 'react-toastify';
+import { SpanSignUp } from '../Login/Login.style';
+import { Link } from 'react-router-dom';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const SignUp = () => {
     const loading = useLoadingByFunc();
     // - - - - - - - - - - - - - - //
     const onSubmit = async values => await loading(async () => {
-        const req = {ok: true} // await signUpRequest(values);
-        if(req.ok)
+        const req = await signUpRequest(values);
+        if(req.status >= 400)
+            toast.error('ایمیل موجود میباشد');
+        else if(req.ok)
             toast.success('حساب ساخته شد');
         else toast.error('مشکلی پیش آمده است');
     });
@@ -42,6 +46,14 @@ const SignUp = () => {
                     error={formik.touched.name && (formik.errors.name != null)} 
                 />
                 <InputEmPas formik={formik} />
+                <SpanSignUp>
+                <span style={{display: 'block'}}>
+                آیا ثبت نام کرده اید؟
+                 <Link style={{color: '#71D0A0',textDecoration: 'none', paddingRight: '4px'}} to='/login'>
+                    ورود
+                </Link>
+                </span>
+                </SpanSignUp>
             </form>
         </GridSignLogin>
     );

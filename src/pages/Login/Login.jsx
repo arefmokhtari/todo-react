@@ -10,17 +10,16 @@ import { SpanSignUp } from './Login.style';
 import { login as loginRequest } from '../../api/requests';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Login = () => {
+    // - - - - - - - - - - - - - - //
     const loading = useLoadingByFunc();
     // - - - - - - - - - - - - - - //
     const onSubmit = async values => await loading(async () => {
         const req = await loginRequest(values);
-        console.log(req);
         if(req.status === 400)
-            toast.success('پسورد یا ایمیل اشتباه است');
+            toast.error('پسورد یا ایمیل اشتباه است');
         else{
             if(req.ok){
-                console.log(values);
-                // localStorage.setItem('token', req.data.token);
+                localStorage.setItem('token', req.data.data);
                 toast.success('لاگین با موفقیت انجام شد');
             }else toast.error('مشکلی پیش آمده است');
         }
