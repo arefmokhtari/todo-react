@@ -2,7 +2,7 @@
 import { Box } from '@mui/material';
 import { InputField } from './InputFromLogin.style';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-const InputFromLogin = ({ Icon , ... props }) => (
+const InputFromLogin = ({ Icon , sx: st , ... props }) => (
     <Box sx={{width: '91%', margin: 'auto'}} dir='rtl'>
         <InputField 
             {... props} 
@@ -23,6 +23,7 @@ const InputFromLogin = ({ Icon , ... props }) => (
                         borderColor: props.error?'#d32f2f':'#71D0A0',
                     },
                 },
+                ... st
             }}
         />
     </Box>

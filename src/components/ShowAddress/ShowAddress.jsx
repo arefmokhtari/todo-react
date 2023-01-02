@@ -24,10 +24,10 @@ const ShowAddress = ({ description, province, city }) => {
                 }}>
                     <Box>
                         <IconButton>
-                            <DeleteIcon sx={{color: 'red'}} />
+                            <EditIcon sx={{color: '#71D0A0'}} /> 
                         </IconButton>
                         <IconButton>
-                            <EditIcon sx={{color: '#71D0A0'}} /> 
+                            <DeleteIcon sx={{color: 'red'}} />
                         </IconButton>
                     </Box>
                 </Grid>
