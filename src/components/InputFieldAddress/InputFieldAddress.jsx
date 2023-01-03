@@ -1,23 +1,33 @@
-
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import { Form, FieldAddress, BtnAdd } from './InputFieldAddress.style';
 import SelectOp from '../UI/SelectOp/SelectOp';
 import MenuItem from '@mui/material/MenuItem';
 import { Grid } from '@mui/material';
+import { province, city } from '../../utils/provinceAndCity';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+const InputFieldAddress = ({formik, text}) => {
 
-const InputFieldAddress = ({formik}) => (
-    <Grid container spacing={1} component={Form} onSubmit={formik.handleSubmit}>
+    const changeProvinceHandler = event => {
+        const { description } = formik.values;
+        formik.setValues({ province: event.target.value ,city: '', description });
+    }
+
+    return (
+        <Grid container spacing={1} component={Form} onSubmit={formik.handleSubmit}>
         <Grid item md={5} sm={10} xs={11} sx={{margin: '10px auto'}}>
             <SelectOp
                 id={'province'}
                 label='استان'
                 name='province'
                 value={formik.values.province}
-                onChange={formik.handleChange}
+                onChange={changeProvinceHandler}
+                onBlur={formik.handleBlur}
+                required
             >
                 <MenuItem>انتخاب کنید</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {
+                    province.map(ci => <MenuItem key={ci.provinceId} value={ci.provinceName}>{ci.provinceName}</MenuItem>)
+                }
             </SelectOp>
         </Grid>
         <Grid item md={5} sm={10} xs={11} sx={{margin: 'auto'}}>
@@ -27,11 +37,13 @@ const InputFieldAddress = ({formik}) => (
                 name='city'
                 value={formik.values.city}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                required
             >
                 <MenuItem>انتخاب کنید</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                {
+                    city.filter(v => v.provinceName == formik.values.province).map(v => <MenuItem key={v.cityId} value={v.cityName}>{v.cityName}</MenuItem>)
+                }
             </SelectOp>
         </Grid>
         <Grid item md={11} sm={10} xs={11} sx={{margin: 'auto'}}>
@@ -40,14 +52,18 @@ const InputFieldAddress = ({formik}) => (
                 maxRows={5}
                 minRows={5}
                 multiline
+                error={formik.touched.description && (formik.errors.description != null)}
+                helperText={formik.touched.description && formik.errors.description}
                 { ... formik.getFieldProps('description') }
             />
             
         </Grid>
         <Grid item xs={11} sx={{margin: 'auto'}}>
-            <BtnAdd type='submit' variant='contained'>افزودن آدرس</BtnAdd>
+            <BtnAdd type='submit' variant='contained'>{text}</BtnAdd>
         </Grid>
     </Grid>
-);
-
+    )
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default InputFieldAddress;
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

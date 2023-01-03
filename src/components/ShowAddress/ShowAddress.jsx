@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import HomeIcon from '../UI/ICONS/HomeIcon/HomeIcon';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-const ShowAddress = ({ description, province, city }) => {
+const ShowAddress = ({ description, province, city, ...kwargs }) => {
 
     return (
         <ShowAdd>
@@ -23,10 +23,10 @@ const ShowAddress = ({ description, province, city }) => {
                     alignItems: 'center',
                 }}>
                     <Box>
-                        <IconButton>
+                        <IconButton onClick={() => kwargs.edit(kwargs.id)}>
                             <EditIcon sx={{color: '#71D0A0'}} /> 
                         </IconButton>
-                        <IconButton>
+                        <IconButton onClick={() => kwargs.delete(kwargs.id)}>
                             <DeleteIcon sx={{color: 'red'}} />
                         </IconButton>
                     </Box>
