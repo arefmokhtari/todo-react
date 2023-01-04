@@ -38,7 +38,7 @@ export const FieldAddress = styled(TextField)(({theme, error}) => ({
 }));
 
 export const BtnAdd = styled(Button)({
-    margin: 'auto', 
+    margin: '20px auto', 
     display: 'block',
     boxShadow: '0 0 0 0 !important',
     backgroundColor: '#71D0A0 !important',

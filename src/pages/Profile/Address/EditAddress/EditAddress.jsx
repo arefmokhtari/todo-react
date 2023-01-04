@@ -1,7 +1,6 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import GridProfile from '../../../../components/GridProfile/GridProfile';
-import { Button } from '@mui/material';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import InputFieldAddress from '../../../../components/InputFieldAddress/InputFieldAddress';
 import { setToken, getByIdAddress, updateAddresById } from '../../../../api/requests';
@@ -10,6 +9,7 @@ import { useLoadingByFunc } from '../../../../hooks/loading-hook';
 import { toast } from 'react-toastify';
 import { addAddressValidate } from '../../../../validates/addressValidate';
 import AbsBtn from '../../../../components/GridProfile/AbsBtn/AbsBtn';
+import { handlerError } from '../../../../utils/plugins';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const EditAddress = () => {
     // - - - - - - - - - - - - - - //
@@ -22,7 +22,7 @@ const EditAddress = () => {
         if(req.ok){
             toast.success('انجام شد');
             nav('/profile/address');
-        }else toast.error('مشکلی پیش آمده است');
+        }else handlerError(req.status, nav, toast);
     });
     // - - - - - - - - - - - - - - //
     useEffect(() => {
@@ -33,9 +33,8 @@ const EditAddress = () => {
                 const req = await getByIdAddress(id);
                 if(req.ok)
                     formik.setValues({ city: req.data[0].city, description: req.data[0].description, province: req.data[0].province });
-                else {
+                else if(!handlerError(req.status, nav, toast)){
                     nav('/profile/address');
-                    toast.error('مشکلی پیش آمده است');
                 }
             }))();
         

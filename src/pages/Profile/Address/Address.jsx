@@ -1,16 +1,14 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-
-import { Button } from '@mui/material';
 import GridProfile from '../../../components/GridProfile/GridProfile';
 import ShowAddress from '../../../components/ShowAddress/ShowAddress';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { setToken, getAllAddress, deleteAddresById } from '../../../api/requests';
 import { toast } from 'react-toastify';
 import { useLoadingByFunc } from '../../../hooks/loading-hook';
 import AbsBtn from '../../../components/GridProfile/AbsBtn/AbsBtn';
+import { handlerError } from '../../../utils/plugins';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-
 
 const Address = () => {
     // - - - - - - - - - - - - - - //
@@ -22,7 +20,7 @@ const Address = () => {
         const req = await getAllAddress();
         if(req.ok)
             setAddress(req.data.data);
-        else toast.error('مشکلی پیش آمده');
+        else handlerError(req.status, nav, toast);
     }
     // - - - - - - - - - - - - - - //
     useEffect(() => {
@@ -40,7 +38,7 @@ const Address = () => {
         await toggleAddress();
         if(req.ok)
             toast.success('انجام شد');
-        else toast.error('مشکلی پیش آمده');
+        else handlerError(req.status, nav, toast);
     });
     // - - - - - - - - - - - - - - //
     const moveToEditHandler = id => {
