@@ -19,6 +19,15 @@ export const updateUserById = (id, { name, email, password }) => api.post(`user/
 
 export const login = ({ email, password }) => api.post('user/login', { email, password });
 
+//      user    -       forget passwd
+
+export const sendCode = email => api.post('user/send_code', { email });
+
+export const checkOtp = (email, otp) => api.post('user/check_otp', { email, otp });
+
+export const checkPasswd = (current_password, new_password) => api.post('user/change_password', { current_password, new_password  });
+
+export const confirmPass = (newPass) => api.post('user/change_password', { new_password: newPass });
 
 //      user    -       Address
 

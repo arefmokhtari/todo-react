@@ -5,17 +5,30 @@ import { LogBtn } from '../../InputEmPas/InputEmPas.style';
 import { useFormik } from 'formik';
 import OtpFP from '../OtpFP/OtpFP';
 import { emailValidate } from '../../../validates/ForgetPassValidate';
+import { useLoadingByFunc } from '../../../hooks/loading-hook';
+import { sendCode as sendCodeReq } from '../../../api/requests';
+import { handlerError } from '../../../utils/plugins';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const EmailCM = ({ change }) => {
     // - - - - - - - - - - - - - - //
-    const onSubmit = (values) => {
-        change({
-            CM: OtpFP,
-            config: {
-                email: values.email,
-            },
-        });
-    }
+    const loading = useLoadingByFunc();
+    const nav = useNavigate();
+
+    // - - - - - - - - - - - - - - //
+    const onSubmit = async values => await loading(async () => {
+        const req = await sendCodeReq(values.email);
+        if(req.ok){
+            change({
+                CM: OtpFP,
+                config: {
+                    email: values.email,
+                },
+            });
+        }else handlerError(req.status, nav, toast, { 400: 'ایمیل ثبت نشده است' });
+
+    });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({
         initialValues: {
@@ -27,7 +40,7 @@ const EmailCM = ({ change }) => {
     // - - - - - - - - - - - - - - //
     return ( <>
         <p>لطفا ایمیل خود را وارد کنید</p>
-        <form action="" onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
             <InputFromLogin 
                 label='ایمیل'
                 type='email'
