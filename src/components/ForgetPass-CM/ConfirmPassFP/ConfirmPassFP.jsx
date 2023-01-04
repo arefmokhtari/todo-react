@@ -3,12 +3,13 @@ import PasswdIcon from '../../UI/ICONS/PasswdIcon/PasswdIcon';
 import InputFromLogin from '../../InputFromLogin/InputFromLogin';
 import { LogBtn } from '../../InputEmPas/InputEmPas.style';
 import { useFormik } from 'formik';
+import { confirmValidate } from '../../../validates/ForgetPassValidate';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
 const ConfirmPassFP = ({ change, opt, email }) => {
     // - - - - - - - - - - - - - - //
     const onSubmit = (values) => {
-        
+        console.log(values);   
     }
     // - - - - - - - - - - - - - - //
     const formik = useFormik({
@@ -17,6 +18,7 @@ const ConfirmPassFP = ({ change, opt, email }) => {
             confirmpass: '',
         },
         onSubmit,
+        validationSchema: confirmValidate,
     })
     // - - - - - - - - - - - - - - //
     return ( <>
