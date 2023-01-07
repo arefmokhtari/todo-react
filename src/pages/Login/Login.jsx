@@ -4,27 +4,21 @@ import GridSignLogin from '../../components/GridSignLogin/GridSignLogin';
 import { loginValidate } from '../../validates/SignLoginValidate';
 import InputEmPas from '../../components/InputEmPas/InputEmPas';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useLoadingByFunc } from '../../hooks/loading-hook';
 import { SpanSignUp } from './Login.style';
 import { login as loginRequest } from '../../api/requests';
+import { useRequest } from '../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Login = () => {
     // - - - - - - - - - - - - - - //
-    const loading = useLoadingByFunc();
+    const request = useRequest({ingnoreToken: true});
     // - - - - - - - - - - - - - - //
-    const onSubmit = async values => await loading(async () => {
-        const req = await loginRequest(values);
-        if(req.status === 400)
-            toast.error('پسورد یا ایمیل اشتباه است');
-        else{
-            if(req.ok){
-                localStorage.setItem('token', req.data.data);
-                toast.success('لاگین با موفقیت انجام شد');
-            }else toast.error('مشکلی پیش آمده است');
-        }
+    const onSubmit = async values => await request.requestByLoading({
+        request: loginRequest,
+        args: [values],
+        success: req => localStorage.setItem('token', req.data.data),
+        successText: 'لاگین با موفقیت انجام شد',
+        errorArg: { 400:  'پسورد یا ایمیل اشتباه است'},
     });
-
     // - - - - - - - - - - - - - - //
     const formik = useFormik({
         initialValues: {

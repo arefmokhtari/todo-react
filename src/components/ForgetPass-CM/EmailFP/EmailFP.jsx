@@ -5,29 +5,20 @@ import { LogBtn } from '../../InputEmPas/InputEmPas.style';
 import { useFormik } from 'formik';
 import OtpFP from '../OtpFP/OtpFP';
 import { emailValidate } from '../../../validates/ForgetPassValidate';
-import { useLoadingByFunc } from '../../../hooks/loading-hook';
 import { sendCode as sendCodeReq } from '../../../api/requests';
-import { handlerError } from '../../../utils/plugins';
-import { useNavigate } from 'react-router';
-import { toast } from 'react-toastify';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-const EmailCM = ({ change }) => {
+const EmailCM = ({ request, change }) => {
     // - - - - - - - - - - - - - - //
-    const loading = useLoadingByFunc();
-    const nav = useNavigate();
-
-    // - - - - - - - - - - - - - - //
-    const onSubmit = async values => await loading(async () => {
-        const req = await sendCodeReq(values.email);
-        if(req.ok){
-            change({
-                CM: OtpFP,
-                config: {
-                    email: values.email,
-                },
-            });
-        }else handlerError(req.status, nav, toast, { 400: 'ایمیل ثبت نشده است' });
-
+    const onSubmit = async values => await request.requestByLoading({
+        request: sendCodeReq,
+        args: [values.email],
+        success: (_) => change({
+            CM: OtpFP,
+            config: {
+                email: values.email,
+            },
+        }),
+        errorArg: { 400: 'ایمیل ثبت نشده است' },
     });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({

@@ -1,31 +1,21 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import { Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { toast } from 'react-toastify';
+import { useState } from 'react';
 import AbsBtn from '../../../components/GridProfile/AbsBtn/AbsBtn';
 import GridProfile from '../../../components/GridProfile/GridProfile';
-import { useLoadingByFunc } from '../../../hooks/loading-hook';
-import { en2fa, handlerError } from '../../../utils/plugins'; 
+import { en2fa } from '../../../utils/plugins';
+import { useRequest } from '../../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Wallet = () => {
     // - - - - - - - - - - - - - - //
-    const loading = useLoadingByFunc();
-    const nav = useNavigate();
     const [wallet, setWallet] = useState('');
-    // - - - - - - - - - - - - - - //
-    useEffect(() => {
-        if(!localStorage.getItem('token')) nav('/signup');
-        else { 
-            (async () => await loading(async () => {
-                const req = { ok: true, status: 200, data: '343242342342' } //
-                if(req.ok)
-                    setWallet(req.data);
-                else handlerError(req.status, nav, toast);
-            }))();
-        }
-    }, []);
-
+    const request = useRequest({
+        start: {
+            requestName: 'requestByLoadingAndToken',
+            request: async () => ({ ok: true, status: 200, data: '343242342342' }),
+            success: req => setWallet(req.data),
+        },
+    });
     // - - - - - - - - - - - - - - //
     return (
         <GridProfile msg='کیف پول'>

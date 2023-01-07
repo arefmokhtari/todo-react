@@ -1,17 +1,17 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import { Form, FieldAddress, BtnAdd } from './InputFieldAddress.style';
 import SelectOp from '../UI/SelectOp/SelectOp';
-import MenuItem from '@mui/material/MenuItem';
-import { Grid } from '@mui/material';
+import { Grid, MenuItem } from '@mui/material';
 import { province, city } from '../../utils/provinceAndCity';
+import { useCallback } from 'react';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const InputFieldAddress = ({formik, text}) => {
-
-    const changeProvinceHandler = event => {
+    // - - - - - - - - - - //
+    const changeProvinceHandler = useCallback(event => {
         const { description } = formik.values;
         formik.setValues({ province: event.target.value ,city: '', description });
-    }
-
+    }, []);
+    // - - - - - - - - - - //
     return (
         <Grid container spacing={1} component={Form} onSubmit={formik.handleSubmit}>
         <Grid item md={5} sm={10} xs={11} sx={{margin: '10px auto'}}>
@@ -62,7 +62,8 @@ const InputFieldAddress = ({formik, text}) => {
             <BtnAdd type='submit' variant='contained'>{text}</BtnAdd>
         </Grid>
     </Grid>
-    )
+    );
+    // - - - - - - - - - - //
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default InputFieldAddress;

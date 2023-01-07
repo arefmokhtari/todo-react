@@ -3,43 +3,31 @@ import GridProfile from '../../../../components/GridProfile/GridProfile';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import InputFieldAddress from '../../../../components/InputFieldAddress/InputFieldAddress';
-import { setToken, getByIdAddress, updateAddresById } from '../../../../api/requests';
-import { useEffect } from 'react';
-import { useLoadingByFunc } from '../../../../hooks/loading-hook';
-import { toast } from 'react-toastify';
+import { getByIdAddress, updateAddresById } from '../../../../api/requests';
 import { addAddressValidate } from '../../../../validates/addressValidate';
 import AbsBtn from '../../../../components/GridProfile/AbsBtn/AbsBtn';
-import { handlerError } from '../../../../utils/plugins';
+import { useRequest } from '../../../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const EditAddress = () => {
     // - - - - - - - - - - - - - - //
     const { id } = useParams();
-    const loading = useLoadingByFunc();
     const nav = useNavigate();
-    // - - - - - - - - - - - - - - //
-    const onSubmit = async values => await loading(async () => {
-        const req = await updateAddresById(id, values);
-        if(req.ok){
-            toast.success('انجام شد');
-            nav('/profile/address');
-        }else handlerError(req.status, nav, toast);
+    const request = useRequest({
+        start: {
+            requestName: 'requestByLoadingAndToken',
+            request: getByIdAddress,
+            args: [id],
+            success: req => formik.setValues({ city: req.data[0].city, description: req.data[0].description, province: req.data[0].province }),
+        }
     });
     // - - - - - - - - - - - - - - //
-    useEffect(() => {
-        if(!localStorage.getItem('token')) nav('/signup');
-        else
-            (async () => await loading(async () => {
-                setToken(localStorage.getItem('token'));
-                const req = await getByIdAddress(id);
-                if(req.ok)
-                    formik.setValues({ city: req.data[0].city, description: req.data[0].description, province: req.data[0].province });
-                else if(!handlerError(req.status, nav, toast)){
-                    nav('/profile/address');
-                }
-            }))();
-        
-    }, []);
-
+    const onSubmit = async values => await request.requestByLoadingAndToken({
+        request: updateAddresById,
+        args: [id, values],
+        success: (_) => nav('/profile/address'),
+        showMessage: true,
+    });
+    // - - - - - - - - - - - - - - //
     const formik = useFormik({
         initialValues: {
             description: '', 

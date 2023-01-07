@@ -1,33 +1,21 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import GridProfile from '../../../../components/GridProfile/GridProfile';
-import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import InputFieldAddress from '../../../../components/InputFieldAddress/InputFieldAddress';
 import { addAddressValidate } from '../../../../validates/addressValidate';
-import { useLoadingByFunc } from '../../../../hooks/loading-hook';
-import { storeAddress as addAddressReq, setToken } from '../../../../api/requests';
-import { useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { storeAddress as addAddressReq } from '../../../../api/requests';
 import AbsBtn from '../../../../components/GridProfile/AbsBtn/AbsBtn';
-import { handlerError } from '../../../../utils/plugins';
+import { useRequest } from '../../../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const AddAddress = () => {
     // - - - - - - - - - - - - - - //
-    const loading = useLoadingByFunc();
-    const nav = useNavigate();
+    const request = useRequest({});
     // - - - - - - - - - - - - - - //
-    useEffect(() => {
-        if(!localStorage.getItem('token')) nav('/signup');
-    },[]);
-    // - - - - - - - - - - - - - - //
-    const onSubmit = async (values, { resetForm }) => await loading(async () => {
-        setToken(localStorage.getItem('token'));
-        const req = await addAddressReq(values);
-
-        if(req.ok){
-            toast.success('انجام شد');
-            resetForm();
-        }else handlerError(req.status, nav, toast);
+    const onSubmit = async (values, { resetForm }) => await request.requestByLoadingAndToken({
+        request: addAddressReq,
+        args: [values],
+        success: (_) => resetForm(),
+        showMessage: true,
     });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({

@@ -5,22 +5,22 @@ import { useFormik } from 'formik';
 import GridSignLogin from '../../components/GridSignLogin/GridSignLogin';
 import { signUpValidate } from '../../validates/SignLoginValidate';
 import InputEmPas from '../../components/InputEmPas/InputEmPas';
-import { useLoadingByFunc } from '../../hooks/loading-hook';
 import { signUp as signUpRequest } from '../../api/requests';
-import { toast } from 'react-toastify';
 import { SpanSignUp } from '../Login/Login.style';
 import { Link } from 'react-router-dom';
+import { useRequest } from '../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const SignUp = () => {
-    const loading = useLoadingByFunc();
     // - - - - - - - - - - - - - - //
-    const onSubmit = async values => await loading(async () => {
-        const req = await signUpRequest(values);
-        if(req.status >= 400)
-            toast.error('ایمیل موجود میباشد');
-        else if(req.ok)
-            toast.success('حساب ساخته شد');
-        else toast.error('مشکلی پیش آمده است');
+    const request = useRequest({ ingnoreToken: true });
+    // - - - - - - - - - - - - - - //
+    const onSubmit = async values => await request.requestByLoading({
+        request: signUpRequest,
+        args: [values],
+        showMessage: 'true',
+        successText: 'حساب ساخته شد',
+        errorArg: { 400:  'پسورد یا ایمیل اشتباه است'},
+        success: (_) => request.nav('/login'),
     });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({

@@ -4,25 +4,15 @@ import InputFromLogin from '../../InputFromLogin/InputFromLogin';
 import { LogBtn } from '../../InputEmPas/InputEmPas.style';
 import { useFormik } from 'formik';
 import { confirmValidate } from '../../../validates/ForgetPassValidate';
-import { useLoadingByFunc } from '../../../hooks/loading-hook';
-import { useNavigate } from 'react-router';
-import { confirmPass as cReq, setToken } from '../../../api/requests';
-import { handlerError } from '../../../utils/plugins';
-import { toast } from 'react-toastify';
+import { confirmPass as cReq } from '../../../api/requests';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-
-const ConfirmPassFP = ({ change }) => {
+const ConfirmPassFP = ({ request }) => {
     // - - - - - - - - - - - - - - //
-    const loading = useLoadingByFunc();
-    const nav = useNavigate();
-    // - - - - - - - - - - - - - - //
-    const onSubmit = async values => await loading(async () => {
-        setToken(localStorage.getItem('token'));
-        const req = await cReq(values.password);
-        if(req.ok){
-            toast.success('انجام شد');
-            nav('/');
-        }else handlerError(req.status, nav, toast);
+    const onSubmit = async values => await request.requestByLoadingAndToken({
+        request: cReq,
+        args: [values.password],
+        showMessage: true,
+        success: (_) => request.nav('/'),
     });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({
