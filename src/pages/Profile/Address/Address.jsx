@@ -11,11 +11,11 @@ const Address = () => {
     // - - - - - - - - - - - - - - //
     const [address, setAddress] = useState([]);
     const request = useRequest({
-        start: {
+        start: [{
             requestName: 'requestByLoadingAndToken',
             request: getAllAddress,
             success: req => setAddress(req.data.data),
-        },
+        }],
     });
     // - - - - - - - - - - - - - - //
     const deleteAddHandler = async id => await request.requestByLoadingAndToken({

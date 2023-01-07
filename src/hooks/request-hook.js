@@ -18,17 +18,17 @@ const configure = {
     start: false,
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export const useRequest = ({ ingnoreToken = false, start = configure }) => {
+export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
     // - - - - - - - - - //
     const loading = useLoadingByFunc();
     const nav = useNavigate();
     // - - - - - - - - - //
-    const handlerStart = async () => await [request, requestByLoading, requestByLoadingAndToken].find(v => v.name === start.requestName)(start);
+    const handlerStart = async () => start?.map(async value => await [request, requestByLoading, requestByLoadingAndToken].find(val => val.name === value.requestName)?.(value));
     // - - - - - - - - - //
     useEffect(() => {
         if(!ingnoreToken && !localStorage.getItem('token')) nav('/login');
         else (async () => {
-            start.requestName && await handlerStart();
+            start && await handlerStart();
         })();
     }, [ingnoreToken]);
     // - - - - - - - - - //

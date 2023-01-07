@@ -13,12 +13,12 @@ const EditAddress = () => {
     const { id } = useParams();
     const nav = useNavigate();
     const request = useRequest({
-        start: {
+        start: [{
             requestName: 'requestByLoadingAndToken',
             request: getByIdAddress,
             args: [id],
             success: req => formik.setValues({ city: req.data[0].city, description: req.data[0].description, province: req.data[0].province }),
-        }
+        }],
     });
     // - - - - - - - - - - - - - - //
     const onSubmit = async values => await request.requestByLoadingAndToken({

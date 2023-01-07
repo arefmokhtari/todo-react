@@ -9,12 +9,12 @@ import { useRequest } from '../../../hooks/request-hook';
 const Wallet = () => {
     // - - - - - - - - - - - - - - //
     const [wallet, setWallet] = useState('');
-    const request = useRequest({
-        start: {
+    useRequest({
+        start: [{
             requestName: 'requestByLoadingAndToken',
             request: async () => ({ ok: true, status: 200, data: '343242342342' }),
             success: req => setWallet(req.data),
-        },
+        }],
     });
     // - - - - - - - - - - - - - - //
     return (
