@@ -7,7 +7,7 @@ import { setToken } from '../api/requests';
 import { handlerError } from '../utils/plugins';
 import { useLoadingByFunc } from './loading-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-const configure = {
+const configure = { // doc
     request: async () => {},
     requestName: '',
     errorArg: {},
@@ -16,6 +16,7 @@ const configure = {
     success: req => {},
     showMessage: false,
     start: false,
+    oneStart: false,
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
@@ -23,7 +24,8 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
     const loading = useLoadingByFunc();
     const nav = useNavigate();
     // - - - - - - - - - //
-    const handlerStart = async () => start?.map(async value => await [request, requestByLoading, requestByLoadingAndToken].find(val => val.name === value.requestName)?.(value));
+    const handlerStart = async (one = true) => start?.map(async value => await [request, requestByLoading, requestByLoadingAndToken].find(val => val.name === value.requestName && (!value.oneStart || one))?.(value));
+    const handlerOneStart = async () => await handlerStart(false);
     // - - - - - - - - - //
     useEffect(() => {
         if(!ingnoreToken && !localStorage.getItem('token')) nav('/login');
@@ -34,8 +36,8 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
     // - - - - - - - - - //
     const request = async (config = configure) => {
         const req = await config.request(... config.args || []);
-
-        config.start && await handlerStart();
+        console.log(req);
+        config.start && await handlerOneStart();
         if(req.ok){
             config.success?.(req);
             config.showMessage && toast.success(config.successText || 'انجام شد');
