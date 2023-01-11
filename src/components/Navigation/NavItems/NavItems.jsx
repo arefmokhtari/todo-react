@@ -1,12 +1,10 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-
-import './NavItems.css';
-
+import { UL } from './NavItems.style';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const NavItems = ({ children }) => (
-    <ul className='nav-items'>
+    <UL>
         {children}
-    </ul>
+    </UL>
 );
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default NavItems;

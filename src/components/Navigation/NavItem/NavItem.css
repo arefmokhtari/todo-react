@@ -1,21 +1,5 @@
 
-.nav-item {
-    list-style: none;
-    height: 100%;
-    
-}
 
-.nav-item > a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #434343;
-    padding: 0 18px;
-    height: 100%;
-    font-size: 16px;
-    margin-left: 23px;
-    position: relative;
-}
 
 .nav-item-cir {
     color: #4DC488 !important;
