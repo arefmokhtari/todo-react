@@ -1,5 +1,5 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { Form, FieldAddress, BtnAdd } from './InputFieldAddress.style';
+import { FieldAddress, BtnAdd } from './InputFieldAddress.style';
 import SelectOp from '../UI/SelectOp/SelectOp';
 import { Grid, MenuItem } from '@mui/material';
 import { province, city } from '../../utils/provinceAndCity';
@@ -13,7 +13,7 @@ const InputFieldAddress = ({formik, text}) => {
     }, []);
     // - - - - - - - - - - //
     return (
-        <Grid container spacing={1} component={Form} onSubmit={formik.handleSubmit}>
+        <Grid container spacing={1} component='form' onSubmit={formik.handleSubmit}>
         <Grid item md={5} sm={10} xs={11} sx={{margin: '10px auto'}}>
             <SelectOp
                 id={'province'}

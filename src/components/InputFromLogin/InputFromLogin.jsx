@@ -2,8 +2,8 @@
 import { Box } from '@mui/material';
 import { InputField } from './InputFromLogin.style';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-const InputFromLogin = ({ Icon , sx: st , ... props }) => (
-    <Box sx={{width: '91%', margin: 'auto'}} dir='rtl'>
+const InputFromLogin = ({ Icon , sx: st , style,... props }) => (
+    <Box sx={{width: '91%', margin: 'auto',...style}} dir='rtl'>
         <InputField 
             {... props} 
             variant="outlined" 

@@ -32,7 +32,8 @@ export const LogBtn = styled(Button)({
     border: '1px solid #4DC488',
     '&:hover': {
         border: '1px solid #4DC488',
-fontSize: '16px',    },
+    },
+    fontSize: '16px',
     width: '110px',
     height: '40px',
     

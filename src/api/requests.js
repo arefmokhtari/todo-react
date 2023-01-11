@@ -8,7 +8,7 @@ export const setToken = token => api.addAsyncRequestTransform(request => async (
 
 //      user    -       Login && Sign Up
 
-export const getInfo = () => api.get('user/getInfo');
+export const getUserInfo = () => api.get('user/getInfo');
 
 
 export const signUp = ({ name, email, password }) => api.post('user/signUp', { name, email, password });

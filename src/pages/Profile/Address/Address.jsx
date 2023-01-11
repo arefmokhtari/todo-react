@@ -22,6 +22,8 @@ const Address = () => {
         request: deleteAddresById,
         args: [id],
         start: true,
+        showMessage: true,
+        successText: 'حذف شد',
     });
     // - - - - - - - - - - - - - - //
     return (

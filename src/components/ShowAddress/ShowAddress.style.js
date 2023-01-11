@@ -8,7 +8,10 @@ export const ShowAdd = styled(Box)({
     margin: '15px auto',
 });
 
-export const MsgIcon = styled(Chip)({
+export const MsgIcon = styled(Chip)(({theme}) => ({
     backgroundColor: 'white',
-    //display: 'block',
-});
+    fontSize: '16px',
+    [theme.breakpoints.down('md')]: {
+        fontSize: '14px',
+    },
+}));

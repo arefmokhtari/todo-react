@@ -48,9 +48,9 @@ const MenuHover = ({open, toggleOpen}) => (
                 </ListItem>
                 )
             }
-            <ListItem>
-                <LogBtn variant="outlined" startIcon={<ProfileIndexIcon />} sx={{marginTop: '60px',fontSize: '14px'}}>ثبت نام</LogBtn>
-            </ListItem>
+
+                <LogBtn variant="outlined" startIcon={<ProfileIndexIcon />} sx={{margin: 'auto',marginTop: '60px',fontSize: '14px', width: '134px'}}>ثبت نام</LogBtn>
+
             </List>
         </Box>
     </Drawer>
