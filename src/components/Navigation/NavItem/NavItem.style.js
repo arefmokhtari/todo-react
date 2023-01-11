@@ -18,7 +18,7 @@ export const LI = styled('li')({
         position: 'relative',
     }
 });
-const Nav = styled(NavLink)({
+export const Nav = styled(NavLink)({
     '&:hover': {
         color: '#4DC488 !important',
         '& div': {

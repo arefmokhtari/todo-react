@@ -15,9 +15,10 @@ const Login = () => {
     const onSubmit = async values => await request.requestByLoading({
         request: loginRequest,
         args: [values],
-        success: req => localStorage.setItem('token', req.data.data),
+        success: req => {localStorage.setItem('token', req.data.data.token);request.nav('/')},
         successText: 'لاگین با موفقیت انجام شد',
         errorArg: { 400:  'پسورد یا ایمیل اشتباه است'},
+        showMessage: true,
     });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({

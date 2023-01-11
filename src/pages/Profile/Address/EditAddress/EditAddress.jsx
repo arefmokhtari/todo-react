@@ -1,6 +1,6 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import GridProfile from '../../../../components/GridProfile/GridProfile';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import InputFieldAddress from '../../../../components/InputFieldAddress/InputFieldAddress';
 import { getByIdAddress, updateAddresById } from '../../../../api/requests';
@@ -11,7 +11,6 @@ import { useRequest } from '../../../../hooks/request-hook';
 const EditAddress = () => {
     // - - - - - - - - - - - - - - //
     const { id } = useParams();
-    const nav = useNavigate();
     const request = useRequest({
         start: [{
             requestName: 'requestByLoadingAndToken',
@@ -24,7 +23,7 @@ const EditAddress = () => {
     const onSubmit = async values => await request.requestByLoadingAndToken({
         request: updateAddresById,
         args: [id, values],
-        success: (_) => nav('/profile/address'),
+        success: (_) => request.nav('/profile/address'),
         showMessage: true,
     });
     // - - - - - - - - - - - - - - //

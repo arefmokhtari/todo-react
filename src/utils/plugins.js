@@ -22,3 +22,5 @@ export const handlerError = (status, nav, toast, anyconfig = {}) => {
     return false;
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+export const objectToargGetMethod = object => Object.entries(object).map(value => `${value[0]}=${value[1]}`).join('&');
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

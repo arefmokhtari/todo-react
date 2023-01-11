@@ -35,7 +35,7 @@ const MenuHover = ({open, toggleOpen}) => (
         onClose={toggleOpen}
     >
         <Box role="presentation" sx={{
-            width: '250px',
+            width: '310px',
             }}>
             <LogoTag src={logo} sx={{margin: 'auto', marginTop: '50px',display: 'block'}} />
             <List sx={{width: '134px',margin: 'auto'}}>
@@ -49,7 +49,7 @@ const MenuHover = ({open, toggleOpen}) => (
                 )
             }
             <ListItem>
-                <LogBtn variant="outlined" startIcon={<ProfileIndexIcon />} sx={{marginTop: '60px'}}>ثبت نام</LogBtn>
+                <LogBtn variant="outlined" startIcon={<ProfileIndexIcon />} sx={{marginTop: '60px',fontSize: '14px'}}>ثبت نام</LogBtn>
             </ListItem>
             </List>
         </Box>
