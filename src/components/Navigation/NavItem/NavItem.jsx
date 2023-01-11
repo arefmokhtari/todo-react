@@ -1,11 +1,9 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { NavLink } from 'react-router-dom';
-import {LI} from './NavItem.style';
-import './NavItem.css';
+import { LI, Nav} from './NavItem.style';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const NavItem = ({to, children: childs}) => (
     <LI>
-        <NavLink className={({isActive}) => (isActive?'nav-item-cir':'')} to={to}>{childs} <div className='cir'/></NavLink>
+        <Nav to={to}>{childs} <div className='cir'/></Nav>
     </LI>
 );
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

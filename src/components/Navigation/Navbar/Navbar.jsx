@@ -6,6 +6,8 @@ import NavItem from '../NavItem/NavItem';
 import NavBag from '../../UI/ICONS/NavBag/NavBag';
 import ProfileIndexIcon from '../../UI/ICONS/ProfileIndexIcon/ProfileIndexIcon';
 import MenuIcon from '../../UI/ICONS/MenuIcon/MenuIcon';
+import { useState } from 'react';
+import MenuHover from '../MenuHover/MenuHover';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const configure = {
     'محصولات': '/',
@@ -14,10 +16,16 @@ const configure = {
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Navbar = () => {
+    // - - - - - - - - - - - - - - //
+    const [open, setOpen] = useState(false);
+    const toggleOpen = () => setOpen(!open);
+    // - - - - - - - - - - - - - - //
     return (
         <AppNav position='sticky'>
             <ToolApp component='nav'>
-                <MdBtnMenu>
+                <MenuHover open={open} toggleOpen={toggleOpen} />
+                
+                <MdBtnMenu onClick={toggleOpen}>
                     <MenuIcon />
                 </MdBtnMenu>
                 
@@ -43,6 +51,7 @@ const Navbar = () => {
             </ToolApp>
         </AppNav>
     );
+    // - - - - - - - - - - - - - - //
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default Navbar;
