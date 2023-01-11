@@ -1,14 +1,14 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import { useState } from 'react';
 import GridSignLogin from '../../components/GridSignLogin/GridSignLogin';
-import EmailCM from '../../components/ForgetPass-CM/EmailFP/EmailFP';
+import ConfirmPassFP from '../../components/ForgetPass-CM/ConfirmPassFP/ConfirmPassFP';
+import ChangePass from '../../components/ForgetPass-CM/ChangePass/ChangePass';
 import { useRequest } from '../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-
-const ForgetPass = () => {
+const ChangePasswd = () => {
     // - - - - - - - - - - //
     const [showCM, setCM] = useState({
-        CM: EmailCM,
+        CM: ChangePass,
         config: {},
     });
     const request = useRequest({});
@@ -23,5 +23,5 @@ const ForgetPass = () => {
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export default ForgetPass;
+export default ChangePasswd;
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

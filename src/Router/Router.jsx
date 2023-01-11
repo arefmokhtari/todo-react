@@ -12,6 +12,7 @@ import EditAddress from '../pages/Profile/Address/EditAddress/EditAddress';
 import Wallet from '../pages/Profile/Wallet/Wallet';
 import User from '../pages/Profile/User';
 import EditUser from '../pages/Profile/EditUser/EditUser';
+import ChangePasswd from '../pages/ChangePasswd/ChangePasswd';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Router = () => (
     <Routes>
@@ -33,7 +34,7 @@ const Router = () => (
         <Route path='login' element={<Login />} />
         <Route path='signup' element={<SignUp />} />
         <Route path='forget-passwd' element={<ForgetPass />} />
-
+        <Route path='change-passwd' element={<ChangePasswd />} />
         <Route path='*' element={<NotFound />} />
         
     </Routes>

@@ -24,18 +24,19 @@ const User = () => {
     return (
         <GridProfile msg='حساب کاربری'>
             <AbsBtn to='/profile/edit'>ویرایش</AbsBtn>
+            <AbsBtn sx={{right: '115px'}} to='/change-passwd'>تغییر رمز</AbsBtn>
             <ShowAdd sx={{border: '0'}}>
                 <Grid container>
-                    <Grid item xl={6}>
+                    <Grid item xs={10} lg={6}>
                     <MsgIcon icon={<AccountCircleIcon sx={configure.icon} />} label={user.name}  />
                     </Grid>
-                    <Grid item xl={6}>
+                    <Grid item xs={10} lg={6}>
                         <MsgIcon icon={<PhoneEnabledIcon sx={configure.icon} />} label={user.phone_number || 'وارد نشده'} />
                     </Grid>
-                    <Grid item xl={6}>
+                    <Grid item xs={10} lg={6}>
                         <MsgIcon icon={<WalletIcon sx={configure.icon} />} label={user.wallet_amount || 'خالی میباشد'} />
                     </Grid>
-                    <Grid item xl={6}>
+                    <Grid item xs={10} lg={6}>
                         <MsgIcon icon={<EmailIcon sx={configure.icon} />} label={user.email} />
                     </Grid>
                 </Grid>

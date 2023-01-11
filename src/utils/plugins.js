@@ -1,5 +1,6 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-
+import { tokenName } from '../hooks/request-hook';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const en2fa = num => parseInt(num).toLocaleString('fa-IR').replace(/\٬/g, ',');
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const configErrors = {
@@ -11,7 +12,7 @@ export const configErrors = {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const handlerError = (status, nav, toast, anyconfig = {}) => {
     if(status === 401){
-        localStorage.removeItem('token');
+        localStorage.removeItem(tokenName);
         toast.error('شما نیاز به احراز هویت دارید!');
         nav('/login');
         return true;

@@ -25,7 +25,7 @@ export const sendCode = email => api.post('user/send_code', { email });
 
 export const checkOtp = (email, otp) => api.post('user/check_otp', { email, otp });
 
-export const checkPasswd = (current_password, new_password) => api.post('user/change_password', { current_password, new_password  });
+export const changePasswd = (current_password, new_password) => api.post('user/change_password', { current_password, new_password  });
 
 export const confirmPass = (newPass) => api.post('user/change_password', { new_password: newPass });
 

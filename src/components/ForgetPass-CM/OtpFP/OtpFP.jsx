@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import { otpValidate } from '../../../validates/ForgetPassValidate';
 import ConfirmPassFP from '../ConfirmPassFP/ConfirmPassFP';
 import { checkOtp as checkReq } from '../../../api/requests';
+import { tokenName } from '../../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const OtpFP = ({ request, email, change }) => {
     // - - - - - - - - - - - - - - //
@@ -13,7 +14,7 @@ const OtpFP = ({ request, email, change }) => {
         request: checkReq,
         args: [email, values.password],
         success: req => {
-            localStorage.setItem('token', req.data.data.token);
+            localStorage.setItem(tokenName, req.data.data.token);
             change({
                 CM: ConfirmPassFP,
                 config: {},

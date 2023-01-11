@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { SpanSignUp } from './Login.style';
 import { login as loginRequest } from '../../api/requests';
 import { useRequest } from '../../hooks/request-hook';
+import { tokenName } from '../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Login = () => {
     // - - - - - - - - - - - - - - //
@@ -15,7 +16,7 @@ const Login = () => {
     const onSubmit = async values => await request.requestByLoading({
         request: loginRequest,
         args: [values],
-        success: req => {localStorage.setItem('token', req.data.data.token);request.nav('/')},
+        success: req => {localStorage.setItem(tokenName, req.data.data.token);request.nav('/')},
         successText: 'لاگین با موفقیت انجام شد',
         errorArg: { 400:  'پسورد یا ایمیل اشتباه است'},
         showMessage: true,
