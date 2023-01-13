@@ -4,6 +4,7 @@ import { LogoTag, LogBtn } from '../Navbar/Navbar.style';
 import logo from '../../../assets/nav-logo.png';
 import ProfileIndexIcon from '../../UI/ICONS/ProfileIndexIcon/ProfileIndexIcon';
 import { NavLink } from 'react-router-dom';
+import { tokenName } from '../../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Nav = styled(NavLink)({
     width: '100%',
@@ -49,7 +50,7 @@ const MenuHover = ({open, toggleOpen}) => (
                 )
             }
 
-                <LogBtn variant="outlined" startIcon={<ProfileIndexIcon />} sx={{margin: 'auto',marginTop: '60px',fontSize: '14px', width: '134px'}}>ثبت نام</LogBtn>
+                <LogBtn variant="outlined" to={localStorage.getItem(tokenName)?'profile/show':'/signup'} component={NavLink} startIcon={<ProfileIndexIcon />} sx={{margin: 'auto',marginTop: '60px',fontSize: '14px', width: '134px'}}>{!localStorage.getItem(tokenName)?'ثبت نام':'پروفایل'}</LogBtn>
 
             </List>
         </Box>
