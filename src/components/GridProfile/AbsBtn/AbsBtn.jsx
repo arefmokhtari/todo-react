@@ -2,8 +2,8 @@
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const AbsBtn = ({ children, to,sx }) => (
-    <Button to={to} component={Link} variant='contained' sx={{
+const AbsBtn = ({ children, to,sx, ...kwargs }) => (
+    <Button to={to} component={Link} {... kwargs} variant='contained' sx={{
         position: 'absolute',
         top: '10px',
         right: '30px',

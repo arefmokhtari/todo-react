@@ -8,6 +8,8 @@ import ProfileIndexIcon from '../../UI/ICONS/ProfileIndexIcon/ProfileIndexIcon';
 import MenuIcon from '../../UI/ICONS/MenuIcon/MenuIcon';
 import { useState } from 'react';
 import MenuHover from '../MenuHover/MenuHover';
+import { NavLink } from 'react-router-dom';
+import { tokenName } from '../../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const configure = {
     'محصولات': '/',
@@ -39,7 +41,7 @@ const Navbar = () => {
                     <BtnShop>
                         <NavBag />
                     </BtnShop>
-                    <LogBtn variant="outlined" startIcon={<ProfileIndexIcon />}>ثبت نام</LogBtn>
+                    <LogBtn component={NavLink} to={localStorage.getItem(tokenName)?'profile/show':'/signup'} variant="outlined" startIcon={<ProfileIndexIcon />}>{!localStorage.getItem(tokenName)?'ثبت نام':'پروفایل'}</LogBtn>
                 </BtnsMenu>
 
                 <MdBtnShop>

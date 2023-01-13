@@ -25,7 +25,7 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
     const loading = useLoadingByFunc();
     const nav = useNavigate();
     // - - - - - - - - - //
-    const handlerStart = async (one = true) => start?.map(async value => await [request, requestByLoading, requestByLoadingAndToken].find(val => val.name === value.requestName && (!value.oneStart || one))?.(value));
+    const handlerStart = async (one = true) => await Promise.all(start?.map(value => [request, requestByLoading, requestByLoadingAndToken].find(val => val.name === value.requestName && (!value.oneStart || one))?.(value)));
     const handlerOneStart = async () => await handlerStart(false);
     // - - - - - - - - - //
     const useLimitSkip = (conf = configure) => {
@@ -51,8 +51,9 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
     }, []);
     // - - - - - - - - - //
     const request = async (config = configure) => {
+
         const req = await config.request(... config.args || []);
-        // console.log(req);
+
         config.start && await handlerOneStart();
         if(req.ok){
             config.success?.(req);

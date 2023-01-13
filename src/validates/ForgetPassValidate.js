@@ -35,4 +35,23 @@ export const confirmValidate = yup.object().shape({
         .max(150, 'تعداد حروف وارد شده زیاد است')
         .required('لطفا پسورد را وارد کنید'),
 });
+
+export const changePasswd = yup.object().shape({
+    current_password: yup
+        .string()
+        .min(5, 'باید بیشتر از پنج حرف باشد')
+        .max(150, 'تعداد حروف وارد شده زیاد است')
+        .required('لطفا پسورد را وارد کنید'),
+    password: yup
+        .string()
+        .oneOf([yup.ref('current_password'), null], 'پسورد مطابقت ندارد')
+        .min(5, 'باید بیشتر از پنج حرف باشد')
+        .max(150, 'تعداد حروف وارد شده زیاد است')
+        .required('لطفا پسورد را وارد کنید'),
+    new_password: yup
+        .string()
+        .min(5, 'باید بیشتر از پنج حرف باشد')
+        .max(150, 'تعداد حروف وارد شده زیاد است')
+        .required('لطفا پسورد را وارد کنید'),
+})
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

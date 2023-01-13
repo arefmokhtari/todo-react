@@ -3,7 +3,7 @@ import PasswdIcon from '../../UI/ICONS/PasswdIcon/PasswdIcon';
 import InputFromLogin from '../../InputFromLogin/InputFromLogin';
 import { LogBtn } from '../../InputEmPas/InputEmPas.style';
 import { useFormik } from 'formik';
-import { confirmValidate } from '../../../validates/ForgetPassValidate';
+import { changePasswd } from '../../../validates/ForgetPassValidate';
 import { changePasswd as cReq } from '../../../api/requests';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const ChangePass = ({ request }) => {
@@ -12,16 +12,17 @@ const ChangePass = ({ request }) => {
         request: cReq,
         args: [values],
         showMessage: true,
-        success: (_) => request.nav('/'),
+        success: (_) => request.nav('/profile/show'),
     });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({
         initialValues: {
+            password: '',
             current_password: '',
             new_password: '',
         },
         onSubmit,
-        validationSchema: confirmValidate,
+        validationSchema: changePasswd,
     })
     // - - - - - - - - - - - - - - //
     return ( <>
@@ -34,6 +35,14 @@ const ChangePass = ({ request }) => {
                 { ... formik.getFieldProps('current_password') }
                 helperText={formik.touched.current_password && formik.errors.current_password}
                 error={formik.touched.current_password && (formik.errors.current_password != null)}
+            />
+            <InputFromLogin 
+                label='تکرار پسورد فعلی'
+                Icon={<PasswdIcon />}
+                type='password'
+                { ... formik.getFieldProps('password') }
+                helperText={formik.touched.password && formik.errors.password}
+                error={formik.touched.password && (formik.errors.password != null)}
             />
             <InputFromLogin 
                 label='پسورد جدید'

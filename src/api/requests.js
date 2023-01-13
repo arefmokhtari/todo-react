@@ -14,7 +14,7 @@ export const getUserInfo = () => api.get('user/getInfo');
 export const signUp = ({ name, email, password }) => api.post('user/signUp', { name, email, password });
 
 
-export const updateUserById = (id, { name, email, password }) => api.post(`user/update/${id}`, { name, email, password });
+export const updateUser = (values) => api.post('user/update', values);
 
 
 export const login = ({ email, password }) => api.post('user/login', { email, password });
@@ -25,7 +25,7 @@ export const sendCode = email => api.post('user/send_code', { email });
 
 export const checkOtp = (email, otp) => api.post('user/check_otp', { email, otp });
 
-export const changePasswd = (current_password, new_password) => api.post('user/change_password', { current_password, new_password  });
+export const changePasswd = ({current_password, new_password}) => api.post('user/change_password', { current_password, new_password  });
 
 export const confirmPass = (newPass) => api.post('user/change_password', { new_password: newPass });
 

@@ -1,6 +1,6 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import GridProfile from '../../components/GridProfile/GridProfile';
-import { useRequest } from '../../hooks/request-hook';
+import { tokenName, useRequest } from '../../hooks/request-hook';
 import { getUserInfo } from '../../api/requests';
 import AbsBtn from '../../components/GridProfile/AbsBtn/AbsBtn';
 import { useState } from 'react';
@@ -21,7 +21,8 @@ const User = () => {
             success: req => setUser(req.data),
         }],
     });
-    return (
+    return ( <>
+        <AbsBtn to='/signup' sx={{top: '100px', backgroundColor: 'red !important'}}onClick={() => localStorage.removeItem(tokenName)}>خروج از حساب</AbsBtn>
         <GridProfile msg='حساب کاربری'>
             <AbsBtn to='/profile/edit'>ویرایش</AbsBtn>
             <AbsBtn sx={{right: '115px'}} to='/change-passwd'>تغییر رمز</AbsBtn>
@@ -42,7 +43,7 @@ const User = () => {
                 </Grid>
             </ShowAdd>
         </GridProfile>
-    );
+    </> );
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default User;
