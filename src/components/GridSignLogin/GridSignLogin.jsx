@@ -1,25 +1,22 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import { Grid } from '@mui/material';
-import { Container } from '@mui/system';
-import './GridSignLogin.css';
+import { ImageGrid, ChildrenBox, GridInput } from './GridSignLogin.style';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Temp4SignLogin = ({ children }) => (
-    <Container maxWidth="xl" disableGutters={true}>
-    <Grid container className='main-grid4signupcom'>
-        <Grid item md={6} xs={12} className='grid4signupcom4img'>
-            <Grid item lg={12} md={12} className='grid4signupcom4img-img'>
+    <Grid container sx={{direction: 'rtl',height: {xs: '23vh', lg: '100vh'}}}>
+        <ImageGrid item md={6} xs={12}>
+            <Grid item lg={12} md={12} sx={{backgroundColor: '#71D0A0',width: '100%',height: '100%',}}>
                 {/* <img src="" alt="image" /> */}
             </Grid>
-        </Grid>
-        <Grid item md={6} xs={12} className='grid4signupcominputmain'>
-            <Grid item lg={12} md={12} className='grid4signupcominputmaininput'>
-                <div className='centerinputhandinmaininput' >
+        </ImageGrid>
+        <Grid item md={6} xs={12} sx={{width: '100%',height: {xs: '77vh',md:'100vh'},}}>
+            <GridInput item lg={12} md={12} xl={10}>
+                <ChildrenBox>
                     {children}
-                </div>
-            </Grid>
+                </ChildrenBox>
+            </GridInput>
         </Grid>
     </Grid>
-    </Container>
-)
+);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default Temp4SignLogin;

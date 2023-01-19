@@ -2,17 +2,19 @@
 import GridProfile from '../../components/GridProfile/GridProfile';
 import { tokenName, useRequest } from '../../hooks/request-hook';
 import { getUserInfo } from '../../api/requests';
-import AbsBtn from '../../components/GridProfile/AbsBtn/AbsBtn';
 import { useState } from 'react';
-import { Grid } from '@mui/material';
+import { Box, Grid, IconButton, Menu, MenuItem } from '@mui/material';
 import { ShowAdd, MsgIcon } from '../../components/ShowAddress/ShowAddress.style';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PhoneEnabledIcon from '@mui/icons-material/PhoneEnabled';
 import WalletIcon from '@mui/icons-material/Wallet';
 import EmailIcon from '@mui/icons-material/Email';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const configure = {icon: {color: '#71D0A0 !important',},}
 const User = () => {
+    // - - - - - - - - - - - - - - //
+    const [anchorEl, setAnchorEl] = useState(null);
     const [user, setUser] = useState({});
     const request = useRequest({
         start: [{
@@ -21,11 +23,39 @@ const User = () => {
             success: req => setUser(req.data),
         }],
     });
+    // - - - - - - - - - - - - - - //
     return ( <>
         <GridProfile msg='حساب کاربری'>
-            <AbsBtn to='/profile/edit'>ویرایش</AbsBtn>
-            <AbsBtn sx={{right: {xs: '30px',lg: '115px'}, top: {xs: '50px',lg: '10px'}}} to='/change-passwd'>تغییر رمز</AbsBtn>
-            <AbsBtn to='/signup' sx={{top: {xs: '90px',lg: '53px'}, backgroundColor: 'red !important'}}onClick={() => localStorage.removeItem(tokenName)}>خروج</AbsBtn>
+            <Box sx={{position: 'absolute',top: '10px',right: '30px',}}>
+                <IconButton
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls={anchorEl ? 'long-menu' : undefined}
+                    aria-expanded={anchorEl ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={event => setAnchorEl(event.currentTarget)}
+                >
+                    <MoreVertIcon />
+                </IconButton>
+                <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                    'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={() => setAnchorEl(null)}
+                    PaperProps={{
+                    style: {
+                        width: '15ch',
+                    },
+                    }}
+                >
+                    <MenuItem onClick={() => request.nav('/profile/edit')}>ویرایش</MenuItem>
+                    <MenuItem onClick={() => request.nav('/change-passwd')}>تغییر رمز</MenuItem>
+                    <MenuItem onClick={() => {localStorage.removeItem(tokenName);request.nav('/');}}>خروج</MenuItem>
+                </Menu>
+            </Box>
             <ShowAdd sx={{border: '0'}}>
                 <Grid container>
                     <Grid item xs={10} lg={6}>
