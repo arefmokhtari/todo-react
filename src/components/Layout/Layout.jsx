@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '../../styles/themes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ConfirmProvider from '../UI/Confirm/ConfirmProvider/ConfirmProvider';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Layout = ({ children: child }) => (
     <BrRouter>
@@ -13,7 +14,9 @@ const Layout = ({ children: child }) => (
             <ToastContainer position="top-center" toastStyle={{textAlign: 'right'}} />
                 <LoadingProvider>
                     <RTL>
-                        {child}
+                        <ConfirmProvider>
+                            {child}
+                        </ConfirmProvider>
                     </RTL>
                 </LoadingProvider>
             </ThemeProvider>

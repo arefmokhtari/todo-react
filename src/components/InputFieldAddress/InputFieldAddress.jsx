@@ -8,8 +8,7 @@ import { useCallback } from 'react';
 const InputFieldAddress = ({formik, text}) => {
     // - - - - - - - - - - //
     const changeProvinceHandler = useCallback(event => {
-        const { description } = formik.values;
-        formik.setValues({ province: event.target.value ,city: '', description });
+        formik.setFieldValue('province', event.target.value);
     }, []);
     // - - - - - - - - - - //
     return (

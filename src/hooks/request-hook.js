@@ -1,4 +1,3 @@
-
 // - - - - - - - - - - - [ plague Dr ] - - - - - - - - - - - - //
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -8,7 +7,7 @@ import { handlerError, objectToargGetMethod } from '../utils/plugins';
 import { useLoadingByFunc } from './loading-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const tokenName = 'token';
-const configure = { // [ plague dr ] - doc
+const configure = { // - - - - - - [ plague dr ] - - - - - - - // - doc
     // مقادیر اولیه فراخوانی هوک عبارتند از: مقدار درنظر نگرفتن توکن و مقدار استارت ریکوئست های هوک
     request: async () => {}, // تابع ریکوئست
     errorArg: {}, // در صورت بروز خطا با کدی غیر از کانفیگ فراخوانی میشود
@@ -32,21 +31,6 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
     await Promise.all(start?.map(value => [request, requestByLoading, requestByLoadingAndToken].find(func => func.name === value.requestName && (!value.oneStart || one))?.(value)));
     const handlerOneStart = async () => await handlerStart(false);
     // - - - - - - - - - //
-    const useLimitSkip = (conf = configure) => {
-        const [skip, setSkip] = useState(conf.state || {
-            limit: 10,
-            skip: 0,
-        });
-        //
-        useEffect(() => {
-            (async () => {
-                await requestByLoadingAndToken({ ... conf, args: ['?'+objectToargGetMethod(skip)] });
-            })();
-        }, [skip]);
-        //
-        return [skip, setSkip];
-    }
-    // - - - - - - - - - //
     useEffect(() => {
         if(!ingnoreToken && !localStorage.getItem(tokenName)) nav('/login');
         else (async () => {
@@ -64,8 +48,9 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
         }else handlerError(req.status, nav, toast, config.errorArg);
     }
     // - - - - - - - - - //
-    const requestByLoading = async (config = configure, anyFunc = () => {}) => await loading(async () => {anyFunc?.();await request(config)});
-    const requestByLoadingAndToken = async (config = configure) => await requestByLoading(config, () => setToken(localStorage.getItem(tokenName)));
+    const requestByToken = async (config = configure) => {setToken(localStorage.getItem(tokenName));await request(config)};
+    const requestByLoading = async (config = configure) => await loading(async () => await requestByToken(config));
+    const requestByLoadingAndToken = async (config = configure) => await requestByLoading(config);
     // - - - - - - - - - //
     return {
         requestByLoading,
@@ -73,8 +58,28 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
         nav,
         loading,
         requestByLoadingAndToken,
-        useLimitSkip,
+        requestByToken,
     }
     // - - - - - - - - - //
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+export const useLimitSkip = (conf = configure, stateRequest = { ingnoreToken: false, start: [configure] }) => {
+    const request = useRequest(stateRequest);
+    const [skip, setSkip] = useState(conf.state || {
+        limit: 10,
+        skip: 0,
+    });
+    //
+    useEffect(() => {
+        (async () => {
+            await request.requestByLoadingAndToken({ ... conf, args: ['?'+objectToargGetMethod(skip)] });
+        })();
+    }, [skip]);
+    //
+    return {
+        ...request,
+        skip,
+        setSkip
+    }
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
