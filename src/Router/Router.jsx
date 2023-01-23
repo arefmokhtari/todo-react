@@ -13,13 +13,18 @@ import Wallet from '../pages/Profile/Wallet/Wallet';
 import User from '../pages/Profile/User';
 import EditUser from '../pages/Profile/EditUser/EditUser';
 import ChangePasswd from '../pages/ChangePasswd/ChangePasswd';
+import Footer from '../components/Footer/Footer';
+import { Typography } from '@mui/material';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Router = () => (
     <Routes>
 
         <Route element={<>
             <Navbar />
-            <Outlet />
+                <Typography component='main' sx={{minHeight: '600px'}}>
+                    <Outlet />
+                </Typography>
+            <Footer />
         </>}>
             <Route path='/' element={<Index />} />
             <Route path='profile/address' element={<Address />}/>
