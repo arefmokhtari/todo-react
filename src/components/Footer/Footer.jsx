@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { FooterList, FooterListItem, HeadFooterList,ImageLogo, Map, ImageGrid } from './Footer.style';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Footer = () => (
-    <Grid container sx={{borderTop: '2px solid #EAEAEA'}} component='footer'>
+    <Grid container sx={{borderTop: '2px solid #EAEAEA', marginTop: '100px'}} component='footer'>
         <Grid item xs={11} sx={{margin: 'auto'}}>
             <Grid container maxWidth='xl' sx={{margin: 'auto', padding: '48px 0'}}>
                 

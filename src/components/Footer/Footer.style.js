@@ -62,6 +62,7 @@ export const Map = styled(props => <Typography {... props} component='iframe' />
         margin: 'auto',
         display: 'block',
         marginTop: '80px',
+        width: '300px !important', 
     },
 })); 
 
@@ -69,7 +70,7 @@ export const ImageGrid = styled(Grid)(({theme}) => ({
     [theme.breakpoints.down('md')]: {
         textAlign: 'center',
         '& p': {
-            width: '300px',
+            width: '80%',
             margin: 'auto'
         },
     },

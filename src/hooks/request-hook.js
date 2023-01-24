@@ -1,5 +1,5 @@
 // - - - - - - - - - - - [ plague Dr ] - - - - - - - - - - - - //
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { setToken } from '../api/requests';
@@ -31,7 +31,7 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
     await Promise.all(start?.map(value => [request, requestByLoading, requestByLoadingAndToken].find(func => func.name === value.requestName && (!value.oneStart || one))?.(value)));
     const handlerOneStart = async () => await handlerStart(false);
     // - - - - - - - - - //
-    useEffect(() => {
+    useLayoutEffect(() => {
         if(!ingnoreToken && !localStorage.getItem(tokenName)) nav('/login');
         else (async () => {
             start && await handlerStart();
@@ -70,7 +70,7 @@ export const useLimitSkip = (conf = configure, stateRequest = { ingnoreToken: fa
         skip: 0,
     });
     //
-    useEffect(() => {
+    useLayoutEffect(() => {
         (async () => {
             await request.requestByLoadingAndToken({ ... conf, args: ['?'+objectToargGetMethod(skip)] });
         })();

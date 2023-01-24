@@ -14,6 +14,8 @@ import User from '../pages/Profile/User';
 import EditUser from '../pages/Profile/EditUser/EditUser';
 import ChangePasswd from '../pages/ChangePasswd/ChangePasswd';
 import Footer from '../components/Footer/Footer';
+import AboutUs from '../pages/AboutUs/AboutUs';
+import ContactUs from '../pages/ContactUs/ContactUs';
 import { Typography } from '@mui/material';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Router = () => (
@@ -21,15 +23,21 @@ const Router = () => (
 
         <Route element={<>
             <Navbar />
-                <Typography component='main' sx={{minHeight: '600px'}}>
+                <Typography component='main' sx={{minHeight: '500px'}}>
                     <Outlet />
                 </Typography>
             <Footer />
         </>}>
             <Route path='/' element={<Index />} />
+            
+            <Route path='/about-us' element={<AboutUs />} />
+
+            <Route path='/contact-us' element={<ContactUs />} />
+
             <Route path='profile/address' element={<Address />}/>
             <Route path='profile/address/add' element={<AddAddress />} />
             <Route path='profile/address/edit/:id' element={<EditAddress />} />
+
             <Route path='profile/wallet' element={<Wallet />} />
             <Route path='profile/show' element={<User />} />
             <Route path='profile/edit' element={<EditUser />} />

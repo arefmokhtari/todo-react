@@ -17,8 +17,8 @@ const Nav = styled(NavLink)({
 const configure = {
     'صفحه اصلی': '/',
     'محصولات': '/sdfsdf',
-    'درباره ما': '/test',
-    'ارتباط با ما': '/testt',
+    'درباره ما': '/about-us',
+    'ارتباط با ما': '/contact-us',
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const MenuHover = ({open, toggleOpen}) => (

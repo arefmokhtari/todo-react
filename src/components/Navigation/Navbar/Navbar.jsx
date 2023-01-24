@@ -13,8 +13,8 @@ import { tokenName } from '../../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const configure = {
     'محصولات': '/',
-    'درباره ما': '/test',
-    'ارتباط با ما': '/testt',
+    'درباره ما': '/about-us',
+    'ارتباط با ما': '/contact-us',
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Navbar = () => {
