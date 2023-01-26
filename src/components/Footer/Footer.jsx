@@ -15,7 +15,8 @@ const Footer = () => (
                 <Grid item xs={12} md={4}>
                     <ImageGrid item xs={12} md={10}>
                         <ImageLogo src={logo} />
-                        <Typography paragraph sx={{fontWeight: '400',fontSize: '14px',lineHeight: '21px',color: '#7B808C'}}> در خصوص متن ها نوشته شود می تواند در آن چیزی که میخواهد شود . این یک متن آزمایشی میباشد استفاده شده است .این قسمت درج در خصوص متن ها نوشته شود می تواند در آن چیزی که میخواهد شود . این یک متن آزمایشی میباشد استفاده شده است .این قسمت درج</Typography>
+                        <Typography paragraph sx={{fontWeight: '400',fontSize: '14px',lineHeight: '21px',color: '#7B808C', textAlign: 'justify'}}> 
+                        در خصوص متن ها نوشته شود می تواند در آن چیزی که میخواهد شود . این یک متن آزمایشی میباشد استفاده شده است. این قسمت درج در خصوص متن ها نوشته شود می تواند در آن چیزی که میخواهد شود. این یک متن آزمایشی میباشد استفاده شده است. این قسمت درج</Typography>
                         <Box>
                             <IconButton component='a' target='_blank' href='https://instagram.com'>
                                 <InstagramIcon />
@@ -69,7 +70,7 @@ const Footer = () => (
                     </Grid>
                 </Grid>
 
-                <Grid xs={12} md={4} item sx={{direction: 'rtl'}}>
+                <Grid xs={12} md={4} item sx={{direction: 'rtl'}} display='flex'>
                     <Map
                         //src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12834.486760381295!2d52.8478112!3d36.4666978!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4a5c8790576fb3e8!2z2LTYsdqp2Kog2YbYsdmFINin2YHYstin2LHbjCDYr9in2K_ZhyDaqdin2YjZiNio!5e0!3m2!1sfa!2s!4v1674476180480!5m2!1sfa!2s" 
                         allowFullScreen="" 

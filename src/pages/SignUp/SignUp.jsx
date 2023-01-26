@@ -20,7 +20,7 @@ const SignUp = () => {
         showMessage: 'true',
         successText: 'حساب ساخته شد',
         errorArg: { 400:  'پسورد یا ایمیل اشتباه است'},
-        success: (_) => request.nav('/login'),
+        success: _ => request.nav('/login'),
     });
     // - - - - - - - - - - - - - - //
     const formik = useFormik({

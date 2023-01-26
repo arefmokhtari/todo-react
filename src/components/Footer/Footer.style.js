@@ -56,6 +56,7 @@ export const Map = styled(props => <Typography {... props} component='iframe' />
     border: 0, 
     width: '352px', 
     height: '245px', 
+    display: 'block',
     borderRadius: '8px', 
     background: '#EDEDED',
     [theme.breakpoints.down('md')]: {

@@ -14,7 +14,6 @@ const EditUser = () => {
     const onSubmit = async values => await request.requestByLoadingAndToken({
         request: updateUser,
         args: [values],
-        success: (_) => request.nav('/profile/show'),
         showMessage: true,
     })
     // - - - - - - - - - - - - - - //

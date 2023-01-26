@@ -11,10 +11,10 @@ const AddAddress = () => {
     // - - - - - - - - - - - - - - //
     const request = useRequest({});
     // - - - - - - - - - - - - - - //
-    const onSubmit = async (values, { resetForm }) => await request.requestByLoadingAndToken({
+    const onSubmit = async values => await request.requestByLoadingAndToken({
         request: addAddressReq,
         args: [values],
-        success: (_) => resetForm(),
+        success: _ => request.nav('/profile/address'),
         showMessage: true,
     });
     // - - - - - - - - - - - - - - //

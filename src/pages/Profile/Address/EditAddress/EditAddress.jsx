@@ -23,7 +23,6 @@ const EditAddress = () => {
     const onSubmit = async values => await request.requestByLoadingAndToken({
         request: updateAddresById,
         args: [id, values],
-        success: (_) => request.nav('/profile/address'),
         showMessage: true,
     });
     // - - - - - - - - - - - - - - //

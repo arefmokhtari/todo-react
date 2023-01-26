@@ -13,7 +13,7 @@ const ConfirmProvider = ({ children }) => {
     const [show, setShow] = useState(false);
     const [click, setClick] = useState(configure);
     // - - - - - - - - - - - - //
-    const start = func => setShow(true);
+    const start = () => setShow(true);
     const close = () => setShow(false);
     // - - - - - - - - - - - - //
     return ( 

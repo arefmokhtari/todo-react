@@ -40,21 +40,6 @@ export const IconBox = styled(Box)(({theme}) => ({
     },
 }));
 
-export const Line = styled('div')(({theme}) => ({
-    backgroundColor: '#E2E2E2',
-    height: '2px',
-    width: '88%',
-    position: 'absolute',
-    bottom: '23px',
-    zIndex: -1,
-    left: '0',
-    right: '0',
-    margin: '0 auto',
-    [theme.breakpoints.down('md')]: {
-        bottom: '10px',
-    },
-}));
-
 export const MainGrid = styled(Grid)(({}) => ({
     margin: 'auto', 
     border: '2px solid #D9D9D9',
@@ -62,35 +47,55 @@ export const MainGrid = styled(Grid)(({}) => ({
     borderRadius: '16px',
 }));
 
-export const AboutUsLabel = styled(props => <Typography {...props} component='h1' variant='p'/>)(({theme}) => ({
-    margin: 'auto',
-    textAlign: 'center',
-    marginTop: '80px',
-    marginBottom: '16px',
-    color: '#71D0A0',
+export const ShowLabel = styled(props => <Typography {...props} component='h1' variant='p' />)(({theme}) => ({
     fontWeight: '600',
-    fontSize: '32px !important',
+    fontSize: '32px',
     lineHeight: '48px',
+    color: '#71D0A0',
+    textAlign: 'center',
     position: 'relative',
-    '& span': {
-        backgroundColor: 'white', 
-        width: '20%', 
-        display: 'block',
-        margin: 'auto',
+    marginTop: '76px',
+    zIndex: '10',
+    '&::after': {
+        content: '" "',
+        width: '32%',
+        position: 'absolute',
+        height: '2px',
+        background: '#E2E2E2',
+        top: '23px',
+        left: '7%',
+        zIndex: '-1',
+    },
+    '&::before': {
+        content: '" "',
+        width: '32%',
+        position: 'absolute',
+        height: '2px',
+        background: '#E2E2E2',
+        top: '23px',
+        right: '7%',
+        zIndex: '-1',
     },
     [theme.breakpoints.down('md')]: {
-        '& *': {
-            fontWeight: '400',
-            fontSize: '16px',
-            lineHeight: '16px',
+        '&::after': {
+            width: '30%',
+            left: '5%',
         },
-
+        '&::before': {
+            width: '30%',
+            right: '5%',
+        },
     },
     [theme.breakpoints.down('sm')]: {
-        '& span': {
-            width: '40%',
+        '&::after': {
+            //width: '22%',
+            left: '3%',
         },
-    },
+        '&::before': {
+            //width: '22%',
+            right: '3%',
+        },
+    }
 }));
 
 export const Image = styled(LazyLoadImage)(({theme}) => ({

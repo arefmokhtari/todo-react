@@ -1,5 +1,5 @@
 // - - - - - - - - - - - [ plague Dr ] - - - - - - - - - - - - //
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { setToken } from '../api/requests';

@@ -26,7 +26,7 @@ const User = () => {
     // - - - - - - - - - - - - - - //
     return ( <>
         <GridProfile msg='حساب کاربری'>
-            <Box sx={{position: 'absolute',top: '10px',right: '30px',}}>
+            <Box sx={{position: 'absolute',top: '10px',right: '30px'}}>
                 <IconButton
                     aria-label="more"
                     id="long-button"
@@ -46,10 +46,9 @@ const User = () => {
                     open={Boolean(anchorEl)}
                     onClose={() => setAnchorEl(null)}
                     PaperProps={{
-                    style: {
-                        width: '15ch',
-                    },
+                    style: {width: '15ch',},
                     }}
+                    sx={{'& *':{fontFamily: 'IRANSansX !important',}}}
                 >
                     <MenuItem onClick={() => request.nav('/profile/edit')}>ویرایش</MenuItem>
                     <MenuItem onClick={() => request.nav('/change-passwd')}>تغییر رمز</MenuItem>

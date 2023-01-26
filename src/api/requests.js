@@ -2,9 +2,9 @@
 import api from './config';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
-export const setToken = token => api.addAsyncRequestTransform(request => async () => {
-    request.headers["Authorization"] = "Bearer " + token;
-});
+export const setToken = token => api.addAsyncRequestTransform(request => async () => 
+    request.headers["Authorization"] = "Bearer " + token
+);
 
 //      user    -       Login && Sign Up
 
