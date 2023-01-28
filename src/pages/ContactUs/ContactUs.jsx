@@ -1,65 +1,52 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { Box, Grid, styled, Typography } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import MainGrid from '../../components/MainGrid/MainGrid';
-import { ShowLabel, BoxIcon, BtnSend, Text } from './ContactUs.style';
+import { ShowLabel, BoxIcon, BtnSend, Text, GridInput, ItemBox, ItemIconBox, LabelHead, LabelBody } from './ContactUs.style';
 import SmsIcon from '../../components/UI/ICONS/ContectUsIcons/SmsIcon/SmsIcon';
 import InstagramIcon from '../../components/UI/ICONS/ContectUsIcons/InstagramIcon/InstagramIcon';
 import EmailIcon from '../../components/UI/ICONS/ContectUsIcons/EmailIcon/EmailIcon';
 import CallIcon from '../../components/UI/ICONS/ContectUsIcons/CallIcon/CallIcon';
 import LocationIcon from '../../components/UI/ICONS/ContectUsIcons/LocationIcon/LocationIcon';
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export const GridInput = styled(Grid)({
-    border: '2px solid #D9D9D9',
-    borderRadius: '16px',
-});
-
-
-export const ItemBox = styled(Box)(({theme}) => ({
-    width: '100%',
-    height: '96px',
-    border: '2px solid #D9D9D9',
-    borderRadius: '16px',
-    margin: '0 auto',
-    display: 'flex',
-    alignItems: 'center',
-    [theme.breakpoints.down('md')]: {
-        width: '100%',
-        marginTop: '16px',
-    },
-}));
-
-export const ItemIconBox = styled(Box)(({}) => ({
-    width: '72px',
-    height: '72px',
-    background: '#4DC488',
-    borderRadius: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: '0 12px',
-}));
-
-export const LabelHead = styled(props => <Typography component='h1' {...props}/>)(({}) => ({
-    fontWeight: 500,
-    fontSize: '20px',
-    lineHeight: '30px',
-    color: '#727272',
-}));
-
-export const LabelBody = styled(props => <Typography paragraph {...props}/>)(({}) => ({
-    fontWeight: 500,
-    fontSize: '12px',
-    lineHeight: '20px',
-    marginBottom: '2px',
-    color: '#4F4F4F',
-}));
+import { useState } from 'react';
+import { useRequest, requestName } from '../../hooks/request-hook';
+import { contactUsContent as contactUsContentRequest, storeContactUs } from '../../api/requests';
+import { useFormik } from 'formik';
+import contectUsValidate from '../../validates/contectUsValidate';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const ContactUs = () => {
-
-
+    // - - - - - - - - - - //
+    const onSubmit = async (values, { resetForm }) => await request.requestByLoading({
+        request: storeContactUs,
+        args: [values],
+        showMessage: true,
+        success: _ => resetForm(),
+    })
+    // - - - - - - - - - - //
+    const [contactUsContent, setContactUsContent] = useState({});
+    // - - - - - - - - - - //
+    const request = useRequest({
+        ingnoreToken: true,
+        start: [{
+            requestName: requestName.BYLOADING,
+            request: contactUsContentRequest,
+            success: req => setContactUsContent(req.data),
+        },],
+    });
+    // - - - - - - - - - - //
+    const formik = useFormik({
+        initialValues: {
+            full_name: '',
+            phone_number: '',
+            message: '',
+            email: '',
+        },
+        validationSchema: contectUsValidate,
+        onSubmit,
+    });
+    // - - - - - - - - - - //
     return (
         <MainGrid marginTop='100px'>
-                <GridInput item xs={12} md={8} lg={9} sx={{position: 'relative'}}>
+                <GridInput item xs={12} md={8} lg={9} sx={{position: 'relative'}} component='form' onSubmit={formik.handleSubmit}>
                     <BoxIcon><SmsIcon /></BoxIcon>
                     <Grid item xs={12}>
                         <ShowLabel>ارتباط با ما</ShowLabel>
@@ -70,12 +57,18 @@ const ContactUs = () => {
                                     <Text 
                                         sx={{width: '100%'}}
                                         label='نام و نام خوانوادگی'
+                                        { ... formik.getFieldProps('full_name') }
+                                        error={formik.touched.full_name && (formik.errors.full_name != null)}
+                                        helperText={formik.touched.full_name && formik.errors.full_name}
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={6}>
                                     <Text
                                         sx={{width: '100%'}}
                                         label='شماره تماس'
+                                        { ... formik.getFieldProps('phone_number') }
+                                        error={formik.touched.phone_number && (formik.errors.phone_number != null)}
+                                        helperText={formik.touched.phone_number && formik.errors.phone_number}
                                     />
                                 </Grid>
                         </Grid>
@@ -83,6 +76,9 @@ const ContactUs = () => {
                             <Text
                                 sx={{width: '100%'}}
                                 label='ایمیل'
+                                { ... formik.getFieldProps('email') }
+                                error={formik.touched.email && (formik.errors.email != null)}
+                                helperText={formik.touched.email && formik.errors.email}
                             />
                         </Grid>
                         <Grid item xs={12} sx={{marginTop: '24px'}}>
@@ -92,11 +88,14 @@ const ContactUs = () => {
                                 maxRows={5}
                                 minRows={5}
                                 multiline
+                                { ... formik.getFieldProps('message') }
+                                error={formik.touched.message && (formik.errors.message != null)}
+                                helperText={formik.touched.message && formik.errors.message}
                             />
                         </Grid>
                     </Grid>
                     <Grid item xs={10} sx={{margin: '24px auto'}}>
-                            <BtnSend variant='contained'>
+                            <BtnSend variant='contained' type='submit'>
                                 ارسال پیام
                             </BtnSend>
                         </Grid>
@@ -119,7 +118,7 @@ const ContactUs = () => {
                     </ItemIconBox>
                     <Box sx={{width: 'calc(100% - 72px)'}}>
                         <LabelHead>اینستاگرام</LabelHead>
-                        <LabelBody sx={{direction: 'rtl',  textAlign: 'left'}}>@Barlux_social.media</LabelBody>
+                        <LabelBody sx={{direction: 'rtl',  textAlign: 'left'}}>{contactUsContent.instagram}</LabelBody>
                     </Box>
                 </ItemBox>
 
@@ -129,7 +128,7 @@ const ContactUs = () => {
                     </ItemIconBox>
                     <Box sx={{width: 'calc(100% - 72px)'}}>
                         <LabelHead>ایمیل</LabelHead>
-                        <LabelBody sx={{direction: 'rtl',  textAlign: 'left'}}>farshadfar2702@gmail.com</LabelBody>
+                        <LabelBody sx={{direction: 'rtl',  textAlign: 'left'}}>{contactUsContent.email}</LabelBody>
                     </Box>
                 </ItemBox>
 
@@ -139,7 +138,7 @@ const ContactUs = () => {
                     </ItemIconBox>
                     <Box sx={{width: 'calc(100% - 72px)'}}>
                         <LabelHead>ایمیل</LabelHead>
-                        <LabelBody sx={{direction: 'rtl', textAlign: 'left'}}>09384762702</LabelBody>
+                        <LabelBody sx={{direction: 'rtl', textAlign: 'left'}}>{contactUsContent.phone_number}</LabelBody>
                     </Box>
                 </ItemBox>
 
@@ -152,13 +151,14 @@ const ContactUs = () => {
                     <LabelHead>آدرس</LabelHead>
                     <LabelBody sx={{fontWeight: '500',
                                     fontSize: '12px',
-                                    lineHeight: '18px'}}>قائمشهر خیابان بابل امیر کبیر مجتمع امیر طبقه سوم</LabelBody>
+                                    lineHeight: '18px'}}>{contactUsContent.address}</LabelBody>
                     </Box>
                 </ItemBox>
 
                 </Grid>
         </MainGrid>
     );
+    // - - - - - - - - - - //
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export default ContactUs;

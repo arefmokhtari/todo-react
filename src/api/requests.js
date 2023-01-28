@@ -41,4 +41,11 @@ export const updateAddresById = (id, { description, province, city }) => api.pos
 
 export const deleteAddresById = (id) => api.delete(`address/deleteById/${id}`);
 
+//     ( About & Contect ) Us
+
+export const getAboutUs = () => api.get('about_us/get');
+
+export const contactUsContent = () => api.get('contact_us_content/get');
+
+export const storeContactUs = store => api.post('contact_us/store', store);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

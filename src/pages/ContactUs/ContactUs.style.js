@@ -1,5 +1,5 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { styled, Typography, Box, Button, TextField } from '@mui/material';
+import { styled, Typography, Box, Button, TextField, Grid } from '@mui/material';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const BoxIcon = styled(Box)(({theme}) => ({
     width: '112px',
@@ -94,6 +94,9 @@ export const BtnSend = styled(Button)(({theme}) => ({
 
 export const Text = styled(({error, ...kwargs}) => <TextField {...kwargs}/>)(({error}) => ({
     background: '#FCFCFC',
+    '& .MuiFormHelperText-root': {
+        color: `${error?'#d32f2f':'#71D0A0'} !important`,
+    },
     '& fieldset': {
         borderRadius: '4px',
     },
@@ -114,5 +117,51 @@ export const Text = styled(({error, ...kwargs}) => <TextField {...kwargs}/>)(({e
             borderColor: error?'#d32f2f':'#71D0A0',
         },
     },
+}));
+
+export const GridInput = styled(Grid)({
+    border: '2px solid #D9D9D9',
+    borderRadius: '16px',
+});
+
+
+export const ItemBox = styled(Box)(({theme}) => ({
+    width: '100%',
+    height: '96px',
+    border: '2px solid #D9D9D9',
+    borderRadius: '16px',
+    margin: '0 auto',
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+        width: '100%',
+        marginTop: '16px',
+    },
+}));
+
+export const ItemIconBox = styled(Box)(({}) => ({
+    width: '72px',
+    height: '72px',
+    background: '#4DC488',
+    borderRadius: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 12px',
+}));
+
+export const LabelHead = styled(props => <Typography component='h1' {...props}/>)(({}) => ({
+    fontWeight: 500,
+    fontSize: '20px',
+    lineHeight: '30px',
+    color: '#727272',
+}));
+
+export const LabelBody = styled(props => <Typography paragraph {...props}/>)(({}) => ({
+    fontWeight: 500,
+    fontSize: '12px',
+    lineHeight: '20px',
+    marginBottom: '2px',
+    color: '#4F4F4F',
 }));
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
