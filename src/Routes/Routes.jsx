@@ -1,5 +1,5 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { Route, Routes, Outlet } from 'react-router';
+import { Route, Routes as Router, Outlet } from 'react-router';
 import Index from '../pages/Index/Index';
 import Login from '../pages/Login/Login';
 import NotFound from '../pages/NotFound/NotFound';
@@ -16,10 +16,11 @@ import ChangePasswd from '../pages/ChangePasswd/ChangePasswd';
 import Footer from '../components/Footer/Footer';
 import AboutUs from '../pages/AboutUs/AboutUs';
 import ContactUs from '../pages/ContactUs/ContactUs';
+import News from '../pages/News/News';
 import { Typography } from '@mui/material';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-const Router = () => (
-    <Routes>
+const Routes = () => (
+    <Router>
 
         <Route element={<>
             <Navbar />
@@ -30,9 +31,9 @@ const Router = () => (
         </>}>
             <Route path='/' element={<Index />} />
             
-            <Route path='/about-us' element={<AboutUs />} />
+            <Route path='about-us' element={<AboutUs />} />
 
-            <Route path='/contact-us' element={<ContactUs />} />
+            <Route path='contact-us' element={<ContactUs />} />
 
             <Route path='profile/address' element={<Address />}/>
             <Route path='profile/address/add' element={<AddAddress />} />
@@ -41,6 +42,8 @@ const Router = () => (
             <Route path='profile/wallet' element={<Wallet />} />
             <Route path='profile/show' element={<User />} />
             <Route path='profile/edit' element={<EditUser />} />
+
+            <Route path='news' element={<News />} />
         </Route>
         
 
@@ -50,7 +53,7 @@ const Router = () => (
         <Route path='change-passwd' element={<ChangePasswd />} />
         <Route path='*' element={<NotFound />} />
         
-    </Routes>
+    </Router>
 );
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export default Router;
+export default Routes;

@@ -22,7 +22,8 @@ const contectUsValidate = yup.object().shape({
         .required('لطفا پیام را وارد کنید'),
     email: yup
         .string()
-        .email('ایمیل مطابقت ندارد'),
+        .email('ایمیل مطابقت ندارد')
+        .required('لطفا ایمیل را وارد کنید'),
 });
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

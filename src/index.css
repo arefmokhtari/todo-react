@@ -7,7 +7,7 @@
 }
 
 * {
-    font-family: IRANSansX;
+    font-family: IRANSansX !important;
     box-sizing: border-box;
 }
 

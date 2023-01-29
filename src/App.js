@@ -1,6 +1,6 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 import React from 'react';
-import Router from './Router/Router';
+import Router from './Routes/Routes';
 import Layout from './components/Layout/Layout';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 

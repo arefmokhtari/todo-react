@@ -48,4 +48,9 @@ export const getAboutUs = () => api.get('about_us/get');
 export const contactUsContent = () => api.get('contact_us_content/get');
 
 export const storeContactUs = store => api.post('contact_us/store', store);
+
+//     news
+
+export const getNews = (url = '') => api.get(`news/get${url}`);
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
