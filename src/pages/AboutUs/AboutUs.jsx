@@ -6,7 +6,7 @@ import { useRequest, requestName } from '../../hooks/request-hook';
 import { getAboutUs } from '../../api/requests';
 import { useState } from 'react';
 import parse from 'html-react-parser';
-import { url } from '../../api/config';
+import { fileApi } from '../../utils/plugins';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const AboutUs = () => {
     // - - - - - - - - - - //
@@ -41,7 +41,7 @@ const AboutUs = () => {
                 <Grid item xs={12} md={10} sx={{margin: 'auto', marginTop: '38px'}}>
                     <Image 
                         alt=''
-                        src={aboutUs.image?`${url}/${aboutUs.image}`:''}
+                        src={fileApi(aboutUs.image)}
                     />
                 </Grid>
                 <Grid item xs={12} md={10} sx={{margin: 'auto', marginTop: '38px', marginBottom: '64px'}} display='flex' justifyContent='center'>

@@ -18,6 +18,7 @@ import AboutUs from '../pages/AboutUs/AboutUs';
 import ContactUs from '../pages/ContactUs/ContactUs';
 import News from '../pages/News/News';
 import { Typography } from '@mui/material';
+import NewsShow from '../pages/News/NewsShow/NewsShow';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Routes = () => (
     <Router>
@@ -44,6 +45,7 @@ const Routes = () => (
             <Route path='profile/edit' element={<EditUser />} />
 
             <Route path='news' element={<News />} />
+            <Route path='news/show/:id' element={<NewsShow />} />
         </Route>
         
 

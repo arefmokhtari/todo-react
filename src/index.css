@@ -6,6 +6,11 @@
     src: local('IRANSansX'), url('./fonts/IRANSansXRegular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Salamat';
+    src: local('Salamat'), url('./fonts/Salamat.ttf') format('truetype');
+}
+
 * {
     font-family: IRANSansX !important;
     box-sizing: border-box;

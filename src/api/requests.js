@@ -53,4 +53,5 @@ export const storeContactUs = store => api.post('contact_us/store', store);
 
 export const getNews = (url = '') => api.get(`news/get${url}`);
 
+export const getNewsById = id => api.get(`admin/news/getById/${id}`);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

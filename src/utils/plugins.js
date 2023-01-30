@@ -1,4 +1,7 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+import { url } from '../api/config';
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
 export const en2fa = num => parseInt(num).toLocaleString('fa-IR').replace(/\٬/g, ',');
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const configErrors = {
@@ -57,4 +60,8 @@ export const enNum2FaNum = num => num.replace(
 );
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const objectToargGetMethod = object => Object.entries(object).map(value => `${value[0]}=${value[1]}`).join('&');
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+export const fileApi = file => `${url}/${file}`;
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+export const pageinCal = count => parseInt((count||0)/10)+(count<10 || count%10!=0?1:0);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

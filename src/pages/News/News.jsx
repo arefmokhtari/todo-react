@@ -1,89 +1,28 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { Grid, Box, Typography, styled, Button, IconButton } from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 import { useLimitSkip, requestName } from '../../hooks/request-hook';
 import { getNews } from '../../api/requests';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useState } from 'react';
-import pic from './computer-screens-running-programming-code-empty-software-developing-agency-office-computers-parsing-data-algorithms-background-neural-network-servers-cloud-computing-data-room 1.jpg';
+import { useState, useRef } from 'react';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export const BoxShow = styled(props => <Box {...props} />)(({}) => ({
-    cursor: 'pointer',
-    color: '#ACABAB',
-    display: 'block',
-    paddingBottom: '28px',
-    borderBottom: '1px solid #D9D9D9',
-    marginBottom: '20px',
-}));
-export const LabelShow = styled(props => <Typography component='h1' {...props} />)(({}) => ({
-    color: '#4DC488',
-    fontWeight: 400,
-    fontSize: '32px',
-    lineHeight: '213.02%',
-    breakBefore: 'always',
-    display: 'flex',
-    alignItems: 'center',
-    '&::before': {
-        content: '" "',
-        width: '5px',
-        height: '36px',
-        backgroundColor: '#4DC488',
-        display: 'inline-block',
-        borderRadius: '2.5px',
-        marginRight: '10px',
-    },
-}));
-
-export const BoxImage = styled(Box)(({}) => ({
-    width: '150px',
-    height: '126px',
-    background: '#4DC488',
-    '& img':{
-        opacity: .6,
-    },
-    borderRadius: '20px',
-    overflow: 'hidden',
-}));
-
-export const BoxImportantImage = styled(Box)(({}) => ({
-    width: '100%',
-    height: '442px',
-    background: '#4DC488',
-    opacity: .3,
-    borderRadius: '20px',
-    margin: 'auto',
-}));
-export const ContiBtn = styled(props => <Button variant='outlined' {...props}/>)(({}) => ({
-    width: '100%',
-    height: '64px',
-    border: '2px solid #4DC488 !important',
-    borderRadius: '8px',
-    color: '#4DC488',
-    fontWeight: 400,
-    fontSize: '24px',
-    lineHeight: '213.02%',
-}));
-
-export const GridSlider = styled(props => <Grid item xs={12} {...props} />)(({}) => ({
-    height: '344px',
-    background: '#EDEDED',
-    borderRadius: '24px',
-    transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-    margin: '80px auto',
-    position: 'relative',
-}));
-
-export const ForwardSlider = styled(IconButton)(({}) => ({
-    position: 'absolute',
-    top: '45%',
-}));
+import parse from 'html-react-parser';
+import { fileApi, pageinCal } from '../../utils/plugins';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import PaginationItem from '@mui/material/PaginationItem';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { GridSlider, ForwardSlider, settings, LabelShow, BoxShow, ContiBtn, BoxImage, BoxImportantImage, BoxParse } from './News.style';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const News = () => {
     // - - - - - - - - - - //
+    const slider = useRef();
     const [news, setNews] = useState({});
-    const [importantNews, setImportantNews] = useState({});
+    const [importantNews, setImportantNews] = useState({importantMain: [], important: {}});
     // - - - - - - - - - - //
     const request = useLimitSkip({
         requestName: requestName.BYLOADING,
@@ -100,37 +39,112 @@ const News = () => {
             requestName: requestName.BYLOADING,
             request: getNews,
             args: ['?is_important=1'],
-            success: req => setImportantNews(req.data.data),
+            success: req => setImportantNews({
+                importantMain: req.data.data.data.slice(0, 2),
+                important: req.data.data.count>2?{count: req.data.data.count-2,data: req.data.data.data.slice(2)}:{count: 0,data: []},
+            }),
+            //oneStart: true,
         },],
     });
+    // - - - - - - - - - - //
+    const MovePagHandler = value => request.setSkip(preState => ({... preState, skip: (value-1)*10}));
     // - - - - - - - - - - //
     return (
         <Grid container maxWidth='xl' margin='auto'>
             <Grid item xs={11} margin='auto'>
                 <GridSlider>
-                    <ForwardSlider sx={{right: '10px'}}>
+                    <ForwardSlider sx={{right: '10px', zIndex: 1}} onClick={() => slider.current.slickGoTo(1)}>
                         <ArrowBackIcon />
                     </ForwardSlider>
-                    <ForwardSlider sx={{left: '10px'}}>
+                    <ForwardSlider sx={{left: '10px', zIndex: 1}} onClick={() => slider.current.slickGoTo(0)}>
                         <ArrowForwardIcon />
                     </ForwardSlider>
+                    <Box component={Slider} {...settings} ref={slider} sx={{
+                        height: {xs: '208px !important',md: '344px !important'},
+                        WebkitTransform: 'scaleX(-1)',
+                    }}>
+                        {
+                            importantNews.important?.data?.map(_new => 
+                            <Box key={_new.id} sx={{width: '90% !important',margin: 'auto', display: 'flex !important', height: '100%', alignItems: 'center'}}>
+                                <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'end',
+                                    alignItems: 'center',
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                >
+                                <Box>
+                                    <LabelShow sx={{
+                                        display: 'block',
+                                        textAlign: 'left',
+                                        '&::before': {
+                                            display: 'none',
+                                        },
+                                    }}>{_new.title}</LabelShow> 
+                                    <Box sx={{
+                                        //width: '60%',
+                                        fontWeight: 400,
+                                        fontSize: '20px',
+                                        lineHeight: '213.02%',
+                                        color: '#ACABAB',
+                                        '& *': {
+                                            textAlign: 'left !important',
+                                            fontSize: {xs: '12px !important',md: '20px !important'},
+                                            lineHeight: '150%',
+                                        },
+                                    }}>
+                                        {parse(_new.text || '')}
+                                    </Box>
+                                    <Box sx={{
+                                        float: 'left',
+                                    }}>
+                                        <ContiBtn
+                                            startIcon={<KeyboardArrowLeftIcon />} 
+                                            onClick={() => request.nav(`show/${_new.id}`)}
+                                            sx={{
+                                                width: {xs: '125px', md: '200px'},
+                                                paddingRight: '2px',
+                                                height: {xs: '30px', md: '64px'},
+                                                fontSize: {xs: '11px', md: '24px'},
+                                            }}
+                                        >
+                                            ادامه
+                                    </ContiBtn>
+                                    </Box>
+                                </Box>
+                                    <Box sx={{padding: {xs: '20px 0', md: '0 0'}}}>
+                                        <Typography 
+                                            sx={{
+                                                height: {xs: '110px !important',sm: '180px !important',md: '344px !important'},
+                                                marginRight: '10px',
+                                            }}
+                                            className='rev'
+                                            component={LazyLoadImage}
+                                            src={fileApi(_new.image)}
+                                        />
+                                    </Box>
+                                </Box>
+                            </Box>
+                            )
+                        }
+                    </Box>
                 </GridSlider>
                 <Grid container>
                     <Grid item xs={12} md={6}>
-                        {importantNews.data?.map(_new => (
-                                <BoxShow key={_new.id}>
-                                    <LabelShow>
-                                        شرکت نرم افزاری داده کاو وب در سال ۱۳۹۶
-                                    </LabelShow>
+                        {news.data?.map(_new => (
+                                <BoxShow key={_new.id} onClick={() => request.nav(`show/${_new.id}`)}>
+                                    <LabelShow>{_new.title}</LabelShow>
                                     <Box sx={{width: '100%', display: 'flex', alignItems: 'center'}}>
                                         <BoxImage>
                                             <LazyLoadImage 
-                                                src={pic}
+                                                src={fileApi(_new.image)}
                                             />
                                         </BoxImage>
-                                        <Box sx={{width: 'calc(95% - 126px)', marginLeft: '10px'}}>
-                                        <p>شرکت نرم افزاری داده کاووب در سال 1396 فعالیت خود را در شهرستان قائمشهر در سه بخش طراحی سایت سامانه های تحت وب و اپلیکیشن </p>
-                                        </Box>       
+                                        <BoxParse>
+                                            {parse(_new.text || '')}
+                                        </BoxParse>       
                                     </Box>
                                 </BoxShow>
                         ))}
@@ -138,24 +152,30 @@ const News = () => {
                     <Grid item xs={12} md={6} sx={{display: {md: 'block', xs: 'none'}}}>
                         <Grid container display='flex' justifyContent='end'>
                             <Grid item xs={11}>
-                            {importantNews.data?.slice(0,2).map(_news =>
-                                <Box key={_news.id} sx={{marginBottom: '10px'}}>
-                                    
+                            {importantNews.importantMain?.map(_new =>
+                                <Box key={_new.id} sx={{marginBottom: '10px'}}>
                                     <BoxImportantImage>
-
+                                            <Typography 
+                                                component={LazyLoadImage}
+                                                src={fileApi(_new.image)}
+                                                sx={{
+                                                    //width: '100%',
+                                                    height: '100%',
+                                                }}
+                                            />
                                     </BoxImportantImage>
-                                    <LabelShow>
-                                        شرکت نرم افزاری داده کاو وب در سال ۱۳۹۶
-                                    </LabelShow>
+                                    <LabelShow>{_new.title}</LabelShow>
                                     <Box sx={{
+                                        width: '100%',
                                         fontWeight: 400,
                                         fontSize: '20px',
                                         lineHeight: '213.02%',
                                         color: '#ACABAB',
+                                        
                                     }}>
-                                    شرکت نرم افزاری داده کاووب در سال 1396 فعالیت خود را در شهرستان قائمشهر در سه بخش طراحی سایت سامانه های تحت وب و اپلیکیشن شرکت نرم افزاری داده کاووب در سال 1396 فعالیت خود را در شهرستان قائمشهر در سه بخش طراحی سایت سامانه های تحت وب و اپلیکیشن 
+                                        {parse(_new.text || '')}
                                     </Box>
-                                    <ContiBtn endIcon={<KeyboardArrowLeftIcon />}>
+                                    <ContiBtn endIcon={<KeyboardArrowLeftIcon />} onClick={() => request.nav(`show/${_new.id}`)}>
                                         ادامه
                                     </ContiBtn>
                                 </Box>
@@ -163,6 +183,31 @@ const News = () => {
                             </Grid>
                         </Grid>
                     </Grid>
+                </Grid>
+                <Grid item sx={{margin: 'auto'}}>
+                    <Stack spacing={2}>
+                        <Pagination
+                            sx={{
+                                margin: 'auto',
+                                "& .Mui-selected": {
+                                    background: "white !important", 
+                                    color: '#4DC488',
+                                },
+                                '& *': {
+                                    fontFamily: 'Salamat !important',
+                                },
+                                //'& .MuiButtonBase-root':{paddingTop: '6px'}
+                            }}
+                            count={pageinCal(news.count)}
+                            onChange={(_, value) => MovePagHandler(value)}
+                            renderItem={item => (
+                                <PaginationItem
+                                    slots={{ previous: KeyboardArrowRightIcon, next: KeyboardArrowLeftIcon }}
+                                    {...item}
+                                />
+                            )}
+                        />
+                    </Stack>
                 </Grid>
             </Grid>
         </Grid>
