@@ -54,4 +54,18 @@ export const storeContactUs = store => api.post('contact_us/store', store);
 export const getNews = (url = '') => api.get(`news/get${url}`);
 
 export const getNewsById = id => api.get(`admin/news/getById/${id}`);
+
+
+//     products
+
+export const getProducts = (url = '') => api.get(`admin/product/get${url}`);
+
+export const getByIdProducts = id => api.get(`admin/product/getById/${id}`);
+
+
+//     categories 
+
+export const getCategories = (url = '') => api.get(`admin/category/get${url}`); 
+
+export const getByIdCategory = id => api.get(`admin/category/getById/${id}`);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

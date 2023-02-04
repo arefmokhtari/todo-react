@@ -19,6 +19,8 @@ import ContactUs from '../pages/ContactUs/ContactUs';
 import News from '../pages/News/News';
 import { Typography } from '@mui/material';
 import NewsShow from '../pages/News/NewsShow/NewsShow';
+import Products from '../pages/Products/Products';
+import Product from '../pages/Product/Product';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Routes = () => (
     <Router>
@@ -46,6 +48,15 @@ const Routes = () => (
 
             <Route path='news' element={<News />} />
             <Route path='news/show/:id' element={<NewsShow />} />
+
+            <Route path='/products' element={<Products />} />
+            <Route path='/products/:id' element={<Products />} />
+            <Route path='/products/:id/:filter' element={<Products />} />
+            <Route path='/products/filter/:filter' element={<Products />} />
+            <Route path='/products/sub/:subid' element={<Products />} />
+            <Route path='/products/sub/:subid/:filter' element={<Products />} />
+
+            <Route path='/product/:id' element={<Product />} />
         </Route>
         
 

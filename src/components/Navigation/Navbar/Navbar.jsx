@@ -23,7 +23,7 @@ const Navbar = () => {
     const toggleOpen = () => setOpen(!open);
     // - - - - - - - - - - - - - - //
     return (
-        <AppNav position='sticky'>
+        <AppNav position='static'>
             <ToolApp component='nav'>
                 <MenuHover open={open} toggleOpen={toggleOpen} />
                 

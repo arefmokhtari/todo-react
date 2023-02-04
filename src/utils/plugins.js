@@ -8,6 +8,7 @@ export const configErrors = {
     84: 'دیتا یافت نشد',
     404: 'یافت نشد',
     500: 'خطای سرور',
+    429: 'درخواست شما بیش از حد اندازه است'
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const handlerError = (status, nav, toast, anyconfig = {}) => {
@@ -23,7 +24,7 @@ export const handlerError = (status, nav, toast, anyconfig = {}) => {
     return false;
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export const type = value => value.constructor.name.toLowerCase();
+export const type = value => value?.constructor.name.toLowerCase();
 // - - - - -
 export const trimIfString = val => type(val) === 'string'?val.trim():val;
 // - - - - -
@@ -38,6 +39,8 @@ export const empty = value => { // object , array , string , any false =| ...
 
         case 'number': return false;
 
+        case undefined: return true;
+        
         default: return false;
     }
 }
@@ -63,5 +66,5 @@ export const objectToargGetMethod = object => Object.entries(object).map(value =
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const fileApi = file => `${url}/${file}`;
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export const pageinCal = count => parseInt((count||0)/10)+(count<10 || count%10!=0?1:0);
+export const pageinCal = (count, skip = 10) => parseInt((count||0)/skip)+(count<skip || count%skip!=0?1:0);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //

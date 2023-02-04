@@ -17,6 +17,7 @@ const NewsShow = () => {
     const { id } = useParams();
     // - - - - - - - - - - //
     const request = useRequest({
+        ingnoreToken: true,
         start: [{
             requestName: requestName.BYLOADING,
             request: getNewsById,
@@ -47,6 +48,7 @@ const NewsShow = () => {
                         top: '10px',
                         right: '10px',
                         color: '#4DC488',
+                        background: 'white !important',
                     }}>بازگشت</Button>
                     <Box sx={{position: 'relative'}}>
                         <Box sx={{
@@ -74,7 +76,7 @@ const NewsShow = () => {
                             />
                         </Grid>
                         <Grid item xs={12} sx={{'& *': {color: '#585858', textAlign: 'justify', margin: '16px auto'}}}>
-                            <ShowData sx={{width: '80%',}}>
+                            <ShowData sx={{width: {md: '60%', xs: '80%'},}}>
                                 {parse(news.text || '')}
                             </ShowData>
                         </Grid>

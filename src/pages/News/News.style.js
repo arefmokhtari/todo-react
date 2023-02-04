@@ -78,6 +78,7 @@ export const GridSlider = styled(props => <Grid item xs={12} {...props} />)(({th
     transform: 'matrix(-1, 0, 0, 1, 0, 0)',
     margin: '80px auto',
     position: 'relative',
+    overflow: 'hidden',
     [theme.breakpoints.down('md')]: {
         height: '208px',
     },
