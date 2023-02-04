@@ -53,8 +53,6 @@ const Routes = () => (
             <Route path='/products/:id' element={<Products />} />
             <Route path='/products/:id/:filter' element={<Products />} />
             <Route path='/products/filter/:filter' element={<Products />} />
-            <Route path='/products/sub/:subid' element={<Products />} />
-            <Route path='/products/sub/:subid/:filter' element={<Products />} />
 
             <Route path='/product/:id' element={<Product />} />
         </Route>

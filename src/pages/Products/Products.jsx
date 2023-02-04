@@ -14,12 +14,13 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import CategoryShop from '../../components/UI/CategoryShop/CategoryShop';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import Checkbox from '@mui/material/Checkbox';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Products = () => {
     // - - - - - - - - - - //
     const { id, filter, subid } = useParams();
     const [products, setProducts] = useState({});
-    const [categorires, setCategories] = useState([]);
+    const [categorires, setCategories] = useState({filter: [], categorires: []});
     const [openModal, setOpenModal] = useState(false);
     // - - - - - - - - - - //
     const request = useLimitSkip({
@@ -27,8 +28,8 @@ const Products = () => {
         request: getProducts,
         success: req => setProducts(req.data.data),
         state: {
-            limit: 6,
-            skip: 0,
+            ...(!id && {limit: 6,
+            skip: 0,}),
             ... checkDataNotEmpty({
                 order_by: filter && 'most_'+filter,
                 ... (subid && {subcategory_id: subid} || id && {category_id: id,})
@@ -45,17 +46,18 @@ const Products = () => {
             success: (req, out) => subid?out.reRender(0, {
                 request: getCategories,
                 args: [`?parent_id=${req.data.data.parent_id}`],
-                success: anyReq => setCategories(anyReq.data.data.data),
-            }):setCategories(req.data.data.data),
+                success: anyReq => setCategories({categorires: anyReq.data.data.data, filter: []}),
+            }):setCategories({filter: [], categorires: req.data.data.data}),
         },],
     });
     // - - - - - - - - - - //
     const handlerProduct = useCallback(async () => {
         if(request.skip.category_id != id || filter && request.skip.order_by != 'most_'+filter || request.skip.subcategory_id != subid){
-            request.setSkip(({order_by,category_id, subcategory_id,...preState}) => ({...preState, 
-                ... (subid && {subcategory_id: subid}),
+            request.setSkip({
+                // ... (subid && {subcategory_id: subid}),
+                ... (!id && {limit: 6,skip: 0}),
                 ... (id && {category_id: id}),
-                ...(filter && request.skip.category_id == id && {order_by: filter && 'most_'+filter})}));
+                ...(filter && request.skip.category_id == id && {order_by: filter && 'most_'+filter})});
 
             if(!id && !subid || id && !subid){
             await request.requestByLoading({
@@ -66,11 +68,21 @@ const Products = () => {
                 success: (req, out) => subid?out.reRender(0, {
                     request: getCategories,
                     args: [`?parent_id=${req.data.data.parent_id}`],
-                    success: anyReq => setCategories(anyReq.data.data.data),
-                }):setCategories(req.data.data.data),
+                    success: anyReq => setCategories({filter: [], categorires: anyReq.data.data.data}),
+                }):setCategories({categorires: req.data.data.data, filter: []}),
             });}
         }
     }, [id, subid, filter]);
+    // - - - - - - - - - - //
+    const toggleListBox = id => {
+        const data = [... categorires.filter];
+        if (!data.includes(id)) 
+            data.push(id);
+        else 
+            data.splice(data.indexOf(id), 1);
+          
+        return data;
+    }
     // - - - - - - - - - - //
     useEffect(() => {
         handlerProduct();
@@ -90,15 +102,21 @@ const Products = () => {
                     <Box sx={{overflowY: 'scroll', height: 'calc(100% - 56px)'}}>
                     <List>
                         {
-                            categorires?.map(category =>
-                            <ListItem disablePadding key={category.id}>
-                                <ListItemButton component={NavLink} to={id || subid?`/products/sub/${category.id}`:`/products/${category.id}`} onClick={() => setOpenModal(!openModal)}>
-                                    <ListItemIcon>
-                                        <ArrowLeftIcon />
-                                    </ListItemIcon>
-                                    <ListItemText sx={{color: '#05101D'}} primary={category.title} />
-                                </ListItemButton>
-                            </ListItem>
+                            categorires.categorires?.map(category =>
+                                        <ListItem disablePadding key={category.id}>
+                                            <ListItemButton {...{...((!id && {to: `/products/${category.id}`,component: NavLink}) || {onClick: () => setCategories(pre => ({... pre, filter: toggleListBox(category.id)}))})}}>
+                                                <ListItemIcon>
+                                                    {id?<Checkbox 
+                                                        edge="start"
+                                                        checked={categorires.filter.includes(category.id)}
+                                                        tabIndex={category.id}
+                                                        disableRipple
+                                                        inputProps={{ 'aria-labelledby': `checkbox-list-label-${category.id}` }}
+                                                    />:<ArrowLeftIcon />}
+                                                </ListItemIcon>
+                                                <ListItemText sx={{color: '#05101D'}} primary={category.title} />
+                                            </ListItemButton>
+                                        </ListItem>
                             )
                         }
                     </List>
@@ -124,7 +142,7 @@ const Products = () => {
                                 <BoxAbs />
                             </GridItems>
                             <GridItems item xs={4} md={3} style={({isActive}) => (isActive?{background: '#4DC488', color: 'white'}:{color: '#515151',})} 
-                                to={id?`/products/${id}/sold`:subid?`/products/sub/${subid}/sold`:'/products/filter/sold'} justifyContent='center' component={NavLink}>
+                                to={id?`/products/${id}/sold`:'/products/filter/sold'} justifyContent='center' component={NavLink}>
                                     <TagShow>
                                         پرفروش ترین
                                     </TagShow>
@@ -132,7 +150,7 @@ const Products = () => {
                             </GridItems>
                             <GridItems item xs={4} md={3} 
                             style={({isActive}) => (isActive?{background: '#4DC488', color: 'white'}:{color: '#515151',})} 
-                                to={id?`/products/${id}/cheapest`:subid?`/products/sub/${subid}/cheapest`:'/products/filter/cheapest'} justifyContent='center' component={NavLink}>
+                                to={id?`/products/${id}/cheapest`:'/products/filter/cheapest'} justifyContent='center' component={NavLink}>
                                     <TagShow>
                                         ارزان ترین
                                     </TagShow>
@@ -140,7 +158,7 @@ const Products = () => {
                             </GridItems>
                             <GridItems item xs={4} md={3} 
                             style={({isActive}) => (isActive?{background: '#4DC488', color: 'white'}:{color: '#515151',})} 
-                                to={id?`/products/${id}/expensive`:subid?`/products/sub/${subid}/expensive`:'/products/filter/expensive'} justifyContent='center' component={NavLink}>
+                                to={id?`/products/${id}/expensive`:'/products/filter/expensive'} justifyContent='center' component={NavLink}>
                                     <TagShow>
                                         گرانترین
                                     </TagShow>
@@ -156,11 +174,17 @@ const Products = () => {
                                 <Box sx={{overflowY: 'scroll', height: 'calc(100% - 56px)'}}>
                                 <List>
                                     {
-                                        categorires?.map(category =>
+                                        categorires.categorires?.map(category =>
                                         <ListItem disablePadding key={category.id}>
-                                            <ListItemButton component={NavLink} to={id || subid?`/products/sub/${category.id}`:`/products/${category.id}`}>
+                                            <ListItemButton {...{...((!id && {to: `/products/${category.id}`,component: NavLink}) || {onClick: () => setCategories(pre => ({... pre, filter: toggleListBox(category.id)}))})}}>
                                                 <ListItemIcon>
-                                                    <ArrowLeftIcon />
+                                                    {id?<Checkbox 
+                                                        edge="start"
+                                                        checked={categorires.filter.includes(category.id)}
+                                                        tabIndex={category.id}
+                                                        disableRipple
+                                                        inputProps={{ 'aria-labelledby': `checkbox-list-label-${category.id}` }}
+                                                    />:<ArrowLeftIcon />}
                                                 </ListItemIcon>
                                                 <ListItemText sx={{color: '#05101D'}} primary={category.title} />
                                             </ListItemButton>
@@ -174,7 +198,7 @@ const Products = () => {
                         <Grid item xs={12} md={9}>
                             <Grid container spacing={2}>
                                 {
-                                    products.data?.map(pro => 
+                                    products.data?.filter(pro => categorires.filter.length == 0 || categorires.filter.includes(+pro.subcategory_id)).map(pro => 
                                         <Grid key={pro.id} item xs={6} md={4} to={`/product/${pro.id}`} component={NavLink} sx={{textDecoration: 'none'}}>
                                         <Box sx={{
                                             width: '100%',
@@ -248,7 +272,7 @@ const Products = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item sx={{margin: '20px auto'}}>
+                    {!id && <Grid item sx={{margin: '20px auto'}}>
                         <Stack spacing={2}>
                             <Pagination
                                 sx={{
@@ -272,7 +296,7 @@ const Products = () => {
                                 )}
                             />
                         </Stack>
-                    </Grid>
+                    </Grid>}
                     <Fab  size="medium" onClick={() => setOpenModal(!openModal)}
                         sx={{ 
                             position: 'fixed', 
