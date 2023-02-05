@@ -29,7 +29,7 @@ export const requestName = {
 }
 export const defaultSkip = { limit: 10, skip: 0 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
+export const useRequest = ({ ingnoreToken = false, step = [] , start = [configure] }) => {
     // - - - - - - - - - //
     const loading = useLoadingByFunc();
     const nav = useNavigate();
@@ -44,7 +44,7 @@ export const useRequest = ({ ingnoreToken = false, start = [configure] }) => {
         else (async () => {
             start && await handlerStart();
         })();
-    }, []);
+    }, [... step]);
     // - - - main  - - - //
     const request = async (config = configure) => {
         const req = await config.request(... config.args || []);

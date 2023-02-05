@@ -68,3 +68,5 @@ export const fileApi = file => `${url}/${file}`;
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 export const pageinCal = (count, skip = 10) => parseInt((count||0)/skip)+(count<skip || count%skip!=0?1:0);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+export const sliderCount = (count, step) => count < step ? step - count : count % step;
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
