@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom';
 import { tokenName } from '../../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const configure = {
-    'محصولات': '/',
+    'محصولات': '/products',
     'درباره ما': '/about-us',
     'ارتباط با ما': '/contact-us',
 }
@@ -38,13 +38,13 @@ const Navbar = () => {
                 </NavItems>
 
                 <BtnsMenu>
-                    <BtnShop>
+                    <BtnShop component={NavLink} to='/card'>
                         <NavBag />
                     </BtnShop>
                     <LogBtn component={NavLink} to={localStorage.getItem(tokenName)?'profile/show':'/signup'} variant="outlined" startIcon={<ProfileIndexIcon />}>{!localStorage.getItem(tokenName)?'ثبت نام':'پروفایل'}</LogBtn>
                 </BtnsMenu>
 
-                <MdBtnShop>
+                <MdBtnShop component={NavLink} to='/card'>
                     <NavBag style={{
                         width: '40px',
                         height: '22px'

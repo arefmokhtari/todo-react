@@ -21,6 +21,7 @@ import { Typography } from '@mui/material';
 import NewsShow from '../pages/News/NewsShow/NewsShow';
 import Products from '../pages/Products/Products';
 import Product from '../pages/Product/Product';
+import Card from '../pages/Card/Card';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Routes = () => (
     <Router>
@@ -55,6 +56,8 @@ const Routes = () => (
             <Route path='/products/filter/:filter' element={<Products />} />
 
             <Route path='/product/:id' element={<Product />} />
+
+            <Route path='/card' element={<Card />} />
         </Route>
         
 

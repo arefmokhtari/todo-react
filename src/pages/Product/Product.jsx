@@ -1,5 +1,5 @@
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
-import { Grid, Typography, Box, IconButton } from '@mui/material';
+import { Grid, Typography, Box } from '@mui/material';
 import { useParams } from 'react-router';
 import { getByIdProducts, getProducts } from '../../api/requests';
 import Slider from 'react-slick';
