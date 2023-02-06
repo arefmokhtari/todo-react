@@ -103,7 +103,7 @@ export const Line = styled('div')(({}) => ({
     height: '1px',
 }));
 
-export const BtnConti = styled(props => <Button variant='contained' {...props} />)(({}) => ({
+export const BtnConti = styled(props => <Button variant='contained' {...props} />)(({theme}) => ({
     width: '229px',
     height: '54px',
     background: '#4DC488 !important',
@@ -114,4 +114,10 @@ export const BtnConti = styled(props => <Button variant='contained' {...props} /
     fontWeight: 400,
     fontSize: '20px',
     lineHeight: '16px',
+    [theme.breakpoints.down('lg')]: {
+        width: '190px',
+    },
+    [theme.breakpoints.down('md')]: {
+        width: '229px',
+    },
 }));
