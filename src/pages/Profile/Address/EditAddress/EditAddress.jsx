@@ -38,7 +38,7 @@ const EditAddress = () => {
     // - - - - - - - - - - - - - - //
     return (
         <GridProfile msg='ادیت آدرس'>
-            <AbsBtn to='/profile/address'>بازگشت</AbsBtn>
+            <AbsBtn to={-1}>بازگشت</AbsBtn>
             <InputFieldAddress formik={formik} text='ادیت آدرس'/>
         </GridProfile>
     );

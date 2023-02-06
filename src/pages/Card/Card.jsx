@@ -7,6 +7,7 @@ import TrachCardIcon from '../../components/UI/ICONS/Card/TrachCardIcon/TrachCar
 import { en2fa, fileApi } from '../../utils/plugins';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { Link } from 'react-router-dom';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Card = () => {
     // - - - - - - - - - - //
@@ -113,7 +114,7 @@ const Card = () => {
                                 <CalWidPrice>{en2fa(800000) + 'تومان'}</CalWidPrice>
                             </ShowShopBox>
                             <Line/>
-                            <BtnConti>ادامه فرایند خرید</BtnConti>
+                            <BtnConti component={Link} to='/payment'>ادامه فرایند خرید</BtnConti>
                         </Box>
                     </Grid>
                 </Grid>

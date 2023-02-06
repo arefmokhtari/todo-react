@@ -76,11 +76,8 @@ const Products = () => {
     // - - - - - - - - - - //
     const toggleListBox = id => {
         const data = [... categorires.filter];
-        if (!data.includes(id)) 
-            data.push(id);
-        else 
-            data.splice(data.indexOf(id), 1);
-          
+        if (!data.includes(id)) data.push(id);
+        else data.splice(data.indexOf(id), 1);          
         return data;
     }
     // - - - - - - - - - - //
@@ -103,20 +100,20 @@ const Products = () => {
                     <List>
                         {
                             categorires.categorires?.map(category =>
-                                        <ListItem disablePadding key={category.id}>
-                                            <ListItemButton {...{...((!id && {to: `/products/${category.id}`,component: NavLink}) || {onClick: () => setCategories(pre => ({... pre, filter: toggleListBox(category.id)}))})}}>
-                                                <ListItemIcon>
-                                                    {id?<Checkbox 
-                                                        edge="start"
-                                                        checked={categorires.filter.includes(category.id)}
-                                                        tabIndex={category.id}
-                                                        disableRipple
-                                                        inputProps={{ 'aria-labelledby': `checkbox-list-label-${category.id}` }}
-                                                    />:<ArrowLeftIcon />}
-                                                </ListItemIcon>
-                                                <ListItemText sx={{color: '#05101D'}} primary={category.title} />
-                                            </ListItemButton>
-                                        </ListItem>
+                                <ListItem disablePadding key={category.id}>
+                                    <ListItemButton {...{...((!id && {to: `/products/${category.id}`,component: NavLink}) || {onClick: () => setCategories(pre => ({... pre, filter: toggleListBox(category.id)}))})}}>
+                                        <ListItemIcon>
+                                            {id?<Checkbox 
+                                                edge="start"
+                                                checked={categorires.filter.includes(category.id)}
+                                                tabIndex={category.id}
+                                                disableRipple
+                                                inputProps={{ 'aria-labelledby': `checkbox-list-label-${category.id}` }}
+                                            />:<ArrowLeftIcon />}
+                                        </ListItemIcon>
+                                        <ListItemText sx={{color: '#05101D'}} primary={category.title} />
+                                    </ListItemButton>
+                                </ListItem>
                             )
                         }
                     </List>

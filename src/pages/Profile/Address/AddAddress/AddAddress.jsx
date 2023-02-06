@@ -14,7 +14,7 @@ const AddAddress = () => {
     const onSubmit = async values => await request.requestByLoadingAndToken({
         request: addAddressReq,
         args: [values],
-        success: _ => request.nav('/profile/address'),
+        success: _ => request.nav(-1),
         showMessage: true,
     });
     // - - - - - - - - - - - - - - //
@@ -30,7 +30,7 @@ const AddAddress = () => {
     // - - - - - - - - - - - - - - //
     return (
         <GridProfile msg='افزودن آدرس'>
-            <AbsBtn to='/profile/address'>بازگشت</AbsBtn>
+            <AbsBtn to={-1}>بازگشت</AbsBtn>
             <InputFieldAddress formik={formik} text='افزودن آدرس'/>
         </GridProfile>
     );

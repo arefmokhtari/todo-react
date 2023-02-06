@@ -173,10 +173,10 @@ const Product = () => {
                         </Box>
                     </Grid>
                     <Grid container sx={{position: 'relative'}}>
-                        <IconSlider sx={{left: {md: '-24px', xs: '-15px'},}} onClick={() => slider.current.slickNext()}>
+                        <IconSlider sx={{left: {md: '-24px', xs: '-15px'},display: {md: 'inline-flex', xs: 'none'}}} onClick={() => slider.current.slickNext()}>
                             <KeyboardArrowRightIcon />
                         </IconSlider>
-                        <IconSlider sx={{right: {md: '-24px', xs: '-15px'}}} onClick={() => slider.current.slickPrev()}>
+                        <IconSlider sx={{right: {md: '-24px', xs: '-15px'},display: {md: 'inline-flex', xs: 'none'}}} onClick={() => slider.current.slickPrev()}>
                             <KeyboardArrowLeftIcon />
                         </IconSlider>
                         <Grid item xs={12} component={Slider} {... settings} ref={slider} sx={{

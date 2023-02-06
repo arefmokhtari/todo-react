@@ -51,10 +51,10 @@ const News = () => {
         <Grid container maxWidth='xl' margin='auto'>
             <Grid item xs={11} margin='auto'>
                 <GridSlider>
-                    <ForwardSlider sx={{right: '10px', zIndex: 1}} onClick={() => slider.current.slickGoTo(1)}>
+                    <ForwardSlider sx={{right: '10px', zIndex: 1,display: {md: 'inline-flex', xs: 'none'}}} onClick={() => slider.current.slickGoTo(1)}>
                         <ArrowBackIcon />
                     </ForwardSlider>
-                    <ForwardSlider sx={{left: '10px', zIndex: 1}} onClick={() => slider.current.slickGoTo(0)}>
+                    <ForwardSlider sx={{left: '10px', zIndex: 1,display: {md: 'inline-flex', xs: 'none'}}} onClick={() => slider.current.slickGoTo(0)}>
                         <ArrowForwardIcon />
                     </ForwardSlider>
                     <Box component={Slider} {...settings} ref={slider} sx={{

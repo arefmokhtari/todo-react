@@ -17,11 +17,12 @@ import Footer from '../components/Footer/Footer';
 import AboutUs from '../pages/AboutUs/AboutUs';
 import ContactUs from '../pages/ContactUs/ContactUs';
 import News from '../pages/News/News';
-import { Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import NewsShow from '../pages/News/NewsShow/NewsShow';
 import Products from '../pages/Products/Products';
 import Product from '../pages/Product/Product';
 import Card from '../pages/Card/Card';
+import Payment from '../pages/Payment/Payment';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Routes = () => (
     <Router>
@@ -58,6 +59,8 @@ const Routes = () => (
             <Route path='/product/:id' element={<Product />} />
 
             <Route path='/card' element={<Card />} />
+
+            <Route path='/payment' element={<Payment />} />
         </Route>
         
 
