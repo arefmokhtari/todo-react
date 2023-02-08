@@ -1,0 +1,28 @@
+.test {
+    position: relative;
+    width: 200px; 
+    height: 125px;
+    background-color: white;
+    margin: 86.60px 0;
+  }
+  
+  .test:before,
+  .test:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 100px groove transparent;
+    border-right: 100px groove transparent;
+    right: 0;
+  }
+  
+  .test:before {
+    bottom: 100%;
+    border-bottom: 65px groove white;
+  }
+  
+  .test:after {
+    top: 100%;
+    width: 0;
+    border-top: 65px ridge white;
+  }

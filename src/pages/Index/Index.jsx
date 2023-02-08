@@ -1,7 +1,7 @@
 
 
 const Index = () => {
-    return <h1>index</h1>;
+    return <h1>صفحه اصلی</h1>;
 }
 
 export default Index;

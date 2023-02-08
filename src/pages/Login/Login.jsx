@@ -2,38 +2,28 @@
 import { Grid, Container } from '@mui/material';
 import { GridTop, Grid4Login, DivS, DivLogin, LogBtn } from './Login.style';
 import InputFromLogin from '../../components/InputFromLogin/InputFromLogin';
-import logo from './logo.png';
+import logo from '../../assets/logo.png';
 import PasswdIcon from '../../components/UI/ICONS/PasswdIcon/PasswdIcon';
 import { adminLogin as adminLoginRequest } from '../../api/requests';
 import { useFormik } from 'formik';
-import { useLoadingByFunc } from  '../../hooks/loading-hook';
-import { toast } from 'react-toastify';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import EmailIcon from '../../components/UI/ICONS/EmailIcon/EmailIcon';
 import { loginValidate } from '../../validates/LoginValidate';
+import { useRequest, tokenName } from '../../hooks/request-hook';
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 const Login = () => {
     // - - - - - - - - - - - - //
-    const loading = useLoadingByFunc();
-    const navigate = useNavigate();
+    const requests = useRequest({ ingnoreToken: true });
     // - - - - - - - - - - - - //
-    useEffect(()=> {
-        if(localStorage.getItem('admin_token'))
-            navigate('/');
-    },[navigate]);
-    // - - - - - - - - - - - - //
-    const onSubmit = async values => await loading(async () => {
-        const req = await adminLoginRequest(values);
-        if(req.status === 400)
-            toast.error('نیم یا پسورد اشتباه است');
-        else
-            if(req.ok){
-                localStorage.setItem('admin_token', req.data.data);
-                toast.success('لاگین انجام شد');
-                navigate('/');
-
-            }else toast.error('مشکلی پیش آمده است');
+    const onSubmit = async values => await requests.requestByLoading({
+        request: adminLoginRequest,
+        args: [values],
+        errorArg: { 400:  'نیم یا پسورد اشتباه است'},
+        showMessage: true,
+        successText: 'لاگین انجام شد',
+        success: req => {
+            localStorage.setItem(tokenName, req.data.data);
+            requests.nav('/');
+        },
     });
     // - - - - - - - - - - - - //
     const formik = useFormik({
