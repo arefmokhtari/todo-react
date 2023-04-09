@@ -68,4 +68,6 @@ export const getByIdProducts = id => api.get(`admin/product/getById/${id}`);
 export const getCategories = (url = '') => api.get(`admin/category/get${url}`); 
 
 export const getByIdCategory = id => api.get(`admin/category/getById/${id}`);
+
+export const storeCategory = data => api.post('/admin/category', data);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
