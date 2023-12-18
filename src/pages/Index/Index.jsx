@@ -1,24 +1,53 @@
-import { useFormik } from 'formik';
-import { setToken, storeCategory } from '../../api/requests';
 
+import SunEditor from 'suneditor-react';
+import { useCallback, useState } from 'react';
+import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
+import { useEffect } from 'react';
+import { getActicles } from '../../api/requests';
+import {
+    align,
+    fontColor,
+    hiliteColor,
+    list,
+    table,
+    formatBlock,
+    textStyle,
+    image
+  } from "suneditor/src/plugins";
 const Index = () => {
-    const onSubmit = async values => {
-        setToken('1|caufEFYNVTnceF5CJPP5MrMKBmpAKkTUqW18k6KA');
-        const data = new FormData();
-        data.append('title', values.title);
-        data.append('image', values.image);
-        const res = await storeCategory(data);
-        console.log(res);
+    const [data, setData] = useState('');
+    const [art, setArt] = useState({});
+    const getActi = useCallback(async () => {
+        const d = await getActicles(1);
+        setArt(d.data.data);
+    }, []);
+
+    useEffect(() => {
+        getActi();
+    }, [getActi]);
+
+    const click = async () => {
+        console.log(data);
     }
-    const formik = useFormik({
-        initialValues: { title: '', image: null },
-        onSubmit,
-    });
-    return <form onSubmit={formik.handleSubmit}>
-        <input type='title' placeholder='name' onChange={formik.handleChange} name='title' />
-        <input type='file' onChange={event => formik.setFieldValue('image', event.currentTarget.files[0])} />
-        <button type='submit'>send</button>
-    </form>;
+    console.log(art?.text);
+    return <>
+        <SunEditor 
+            onChange={setData}
+            setOptions={other => ({...other, plugins: [
+                align,
+                formatBlock,
+                fontColor,
+                hiliteColor,
+                list,
+                table,
+                textStyle,
+                image,
+                imageGallery
+              ],})}
+            defaultValue={art.text}
+        />
+        <button onClick={click}>کلیک</button>
+    </>;
 }
 
 export default Index;

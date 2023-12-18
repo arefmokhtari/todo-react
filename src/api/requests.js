@@ -69,5 +69,7 @@ export const getCategories = (url = '') => api.get(`admin/category/get${url}`);
 
 export const getByIdCategory = id => api.get(`admin/category/getById/${id}`);
 
-export const storeCategory = data => api.post('/admin/category', data);
+export const storeCategory = data => api.post('/admin/category', data, { headers: {'Content-Type': 'multipart/form-data',} });
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
+
+export const getActicles = id => api.get(`articles/${id}`); 
